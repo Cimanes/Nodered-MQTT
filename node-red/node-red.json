@@ -1,1220 +1,1496 @@
 [
-  {
-      "id": "4626f4eca8ae462b",
-      "type": "tab",
-      "label": "BME280",
-      "disabled": false,
-      "info": "",
-      "env": []
-  },
-  {
-      "id": "6ee6e0e725972070",
-      "type": "tab",
-      "label": "GPIO's",
-      "disabled": false,
-      "info": "",
-      "env": []
-  },
-  {
-      "id": "9f9e276987b2fb1f",
-      "type": "mqtt-broker",
-      "name": "",
-      "broker": "localhost",
-      "port": "1883",
-      "clientid": "",
-      "autoConnect": true,
-      "usetls": false,
-      "protocolVersion": "4",
-      "keepalive": "60",
-      "cleansession": true,
-      "autoUnsubscribe": true,
-      "birthTopic": "",
-      "birthQos": "0",
-      "birthPayload": "",
-      "birthMsg": {},
-      "closeTopic": "",
-      "closeQos": "0",
-      "closePayload": "",
-      "closeMsg": {},
-      "willTopic": "",
-      "willQos": "0",
-      "willPayload": "",
-      "willMsg": {},
-      "userProps": "",
-      "sessionExpiry": ""
-  },
-  {
-      "id": "77e83d514b9bd6e2",
-      "type": "ui-base",
-      "name": "My Dashboard",
-      "path": "/dashboard",
-      "appIcon": "",
-      "includeClientData": true,
-      "acceptsClientConfig": [
-          "ui-notification",
-          "ui-control"
-      ],
-      "showPathInSidebar": true,
-      "headerContent": "page",
-      "navigationStyle": "default",
-      "titleBarStyle": "default",
-      "showReconnectNotification": true,
-      "notificationDisplayTime": 1,
-      "showDisconnectNotification": true
-  },
-  {
-      "id": "f633910aef2e9d8b",
-      "type": "ui-theme",
-      "name": "Default Theme",
-      "colors": {
-          "surface": "#282828",
-          "primary": "#95cadf",
-          "bgPage": "#000000",
-          "groupBg": "#afafaf",
-          "groupOutline": "#0d0d0d"
-      },
-      "sizes": {
-          "density": "default",
-          "pagePadding": "12px",
-          "groupGap": "12px",
-          "groupBorderRadius": "4px",
-          "widgetGap": "12px"
-      }
-  },
-  {
-      "id": "f244d991d7d0735a",
-      "type": "ui-page",
-      "name": "BME280",
-      "ui": "77e83d514b9bd6e2",
-      "path": "/page1",
-      "icon": "home",
-      "layout": "grid",
-      "theme": "f633910aef2e9d8b",
-      "breakpoints": [
-          {
-              "name": "Default",
-              "px": "0",
-              "cols": "3"
-          },
-          {
-              "name": "Tablet",
-              "px": "576",
-              "cols": "6"
-          },
-          {
-              "name": "Small Desktop",
-              "px": "768",
-              "cols": "9"
-          },
-          {
-              "name": "Desktop",
-              "px": "1024",
-              "cols": "12"
-          }
-      ],
-      "order": 1,
-      "className": "",
-      "visible": "true",
-      "disabled": "false"
-  },
-  {
-      "id": "32d4771e3f2730dd",
-      "type": "ui-group",
-      "name": "Temp",
-      "page": "f244d991d7d0735a",
-      "width": 4,
-      "height": "4",
-      "order": 1,
-      "showTitle": true,
-      "className": "",
-      "visible": "true",
-      "disabled": "false",
-      "groupType": "default"
-  },
-  {
-      "id": "9fb18d31c60ab4b8",
-      "type": "ui-group",
-      "name": "RH",
-      "page": "f244d991d7d0735a",
-      "width": 4,
-      "height": 1,
-      "order": 3,
-      "showTitle": true,
-      "className": "",
-      "visible": "true",
-      "disabled": "false",
-      "groupType": "default"
-  },
-  {
-      "id": "4bad576b391920a8",
-      "type": "ui-group",
-      "name": "Press",
-      "page": "f244d991d7d0735a",
-      "width": 4,
-      "height": 1,
-      "order": 2,
-      "showTitle": true,
-      "className": "",
-      "visible": "true",
-      "disabled": "false",
-      "groupType": "default"
-  },
-  {
-      "id": "73528bb91092cced",
-      "type": "ui-group",
-      "name": "Inputs",
-      "page": "f244d991d7d0735a",
-      "width": 12,
-      "height": 1,
-      "order": 4,
-      "showTitle": true,
-      "className": "",
-      "visible": "true",
-      "disabled": "false",
-      "groupType": "default"
-  },
-  {
-      "id": "c72da1dec48c5176",
-      "type": "ui-page",
-      "name": "Controls",
-      "ui": "77e83d514b9bd6e2",
-      "path": "/page2",
-      "icon": "home",
-      "layout": "grid",
-      "theme": "f633910aef2e9d8b",
-      "breakpoints": [
-          {
-              "name": "Default",
-              "px": "0",
-              "cols": "3"
-          },
-          {
-              "name": "Tablet",
-              "px": "576",
-              "cols": "6"
-          },
-          {
-              "name": "Small Desktop",
-              "px": "768",
-              "cols": "9"
-          },
-          {
-              "name": "Desktop",
-              "px": "1024",
-              "cols": "12"
-          }
-      ],
-      "order": 2,
-      "className": "",
-      "visible": "true",
-      "disabled": "false"
-  },
-  {
-      "id": "eea751cd59c30bc9",
-      "type": "ui-group",
-      "name": "Controls",
-      "page": "c72da1dec48c5176",
-      "width": 6,
-      "height": 1,
-      "order": 2,
-      "showTitle": true,
-      "className": "",
-      "visible": "true",
-      "disabled": "false",
-      "groupType": "default"
-  },
-  {
-      "id": "bcbfe66660dcf8c7",
-      "type": "influxdb",
-      "hostname": "127.0.0.1",
-      "port": 8086,
-      "protocol": "http",
-      "database": "database",
-      "name": "Database",
-      "usetls": false,
-      "tls": "",
-      "influxdbVersion": "2.0",
-      "url": "https://eu-central-1-1.aws.cloud2.influxdata.com",
-      "timeout": 10,
-      "rejectUnauthorized": true
-  },
-  {
-      "id": "6802e7f370cd4a31",
-      "type": "ui-group",
-      "name": "Debug",
-      "page": "c72da1dec48c5176",
-      "width": 6,
-      "height": 1,
-      "order": 1,
-      "showTitle": true,
-      "className": "",
-      "visible": "true",
-      "disabled": "false",
-      "groupType": "default"
-  },
-  {
-      "id": "e488625c59b3303a",
-      "type": "mqtt in",
-      "z": "4626f4eca8ae462b",
-      "name": "mqtt temp",
-      "topic": "esp/bme280/temperature",
-      "qos": "2",
-      "datatype": "auto",
-      "broker": "9f9e276987b2fb1f",
-      "nl": false,
-      "rap": true,
-      "rh": 0,
-      "inputs": 0,
-      "x": 120,
-      "y": 200,
-      "wires": [
-          [
-              "94f7ce855f618ec2",
-              "d12973a308a7b49f",
-              "60fceb4e9c671441",
-              "16e2c7310b4459b7",
-              "2100b3056f7060b5"
-          ]
-      ]
-  },
-  {
-      "id": "3d9e45e6a54996fe",
-      "type": "mqtt in",
-      "z": "4626f4eca8ae462b",
-      "name": "mqtt hum",
-      "topic": "esp/bme280/humidity",
-      "qos": "2",
-      "datatype": "auto",
-      "broker": "9f9e276987b2fb1f",
-      "nl": false,
-      "rap": true,
-      "rh": 0,
-      "inputs": 0,
-      "x": 120,
-      "y": 560,
-      "wires": [
-          [
-              "a106edce8b444678",
-              "4d8a34f987d41325",
-              "f843899b93c676c0",
-              "60fceb4e9c671441",
-              "cff10c52f99ba578"
-          ]
-      ]
-  },
-  {
-      "id": "a106edce8b444678",
-      "type": "ui-chart",
-      "z": "4626f4eca8ae462b",
-      "group": "9fb18d31c60ab4b8",
-      "name": "chart RH",
-      "label": "RH (%)",
-      "order": 2,
-      "chartType": "line",
-      "category": "topic",
-      "categoryType": "msg",
-      "xAxisLabel": "",
-      "xAxisProperty": "",
-      "xAxisPropertyType": "timestamp",
-      "xAxisType": "time",
-      "xAxisFormat": "",
-      "xAxisFormatType": "auto",
-      "xmin": "",
-      "xmax": "",
-      "yAxisLabel": "",
-      "yAxisProperty": "payload",
-      "yAxisPropertyType": "msg",
-      "ymin": "10",
-      "ymax": "90",
-      "bins": 10,
-      "action": "append",
-      "stackSeries": false,
-      "pointShape": "false",
-      "pointRadius": "1",
-      "showLegend": true,
-      "removeOlder": 1,
-      "removeOlderUnit": "3600",
-      "removeOlderPoints": "",
-      "colors": [
-          "#33aa33",
-          "#ff0000",
-          "#ff7f0e",
-          "#51a5e6",
-          "#a347e1",
-          "#d62728",
-          "#ff9896",
-          "#9467bd",
-          "#c5b0d5"
-      ],
-      "textColor": [
-          "#666666"
-      ],
-      "textColorDefault": true,
-      "gridColor": [
-          "#e5e5e5"
-      ],
-      "gridColorDefault": true,
-      "width": 6,
-      "height": 6,
-      "className": "col1",
-      "interpolation": "linear",
-      "x": 500,
-      "y": 580,
-      "wires": [
-          []
-      ]
-  },
-  {
-      "id": "2100b3056f7060b5",
-      "type": "debug",
-      "z": "4626f4eca8ae462b",
-      "name": "debug Temp",
-      "active": true,
-      "tosidebar": true,
-      "console": false,
-      "tostatus": false,
-      "complete": "payload",
-      "targetType": "msg",
-      "statusVal": "",
-      "statusType": "auto",
-      "x": 510,
-      "y": 180,
-      "wires": []
-  },
-  {
-      "id": "94f7ce855f618ec2",
-      "type": "ui-chart",
-      "z": "4626f4eca8ae462b",
-      "group": "32d4771e3f2730dd",
-      "name": "chart Temp",
-      "label": "Temp (ºC)",
-      "order": 2,
-      "chartType": "line",
-      "category": "topic",
-      "categoryType": "msg",
-      "xAxisLabel": "",
-      "xAxisProperty": "",
-      "xAxisPropertyType": "timestamp",
-      "xAxisType": "time",
-      "xAxisFormat": "",
-      "xAxisFormatType": "auto",
-      "xmin": "",
-      "xmax": "",
-      "yAxisLabel": "",
-      "yAxisProperty": "payload",
-      "yAxisPropertyType": "msg",
-      "ymin": "5",
-      "ymax": "35",
-      "bins": 10,
-      "action": "append",
-      "stackSeries": false,
-      "pointShape": "false",
-      "pointRadius": "1",
-      "showLegend": true,
-      "removeOlder": "3",
-      "removeOlderUnit": "3600",
-      "removeOlderPoints": "",
-      "colors": [
-          "#b40000",
-          "#0000b4",
-          "#ff7f0e",
-          "#2ca02c",
-          "#a347e1",
-          "#d62728",
-          "#ff9896",
-          "#9467bd",
-          "#c5b0d5"
-      ],
-      "textColor": [
-          "#666666"
-      ],
-      "textColorDefault": true,
-      "gridColor": [
-          "#e5e5e5"
-      ],
-      "gridColorDefault": true,
-      "width": 6,
-      "height": 6,
-      "className": "",
-      "interpolation": "linear",
-      "x": 510,
-      "y": 220,
-      "wires": [
-          []
-      ]
-  },
-  {
-      "id": "d12973a308a7b49f",
-      "type": "ui-gauge",
-      "z": "4626f4eca8ae462b",
-      "name": "gauge Temp",
-      "group": "32d4771e3f2730dd",
-      "order": 1,
-      "width": 5,
-      "height": 3,
-      "gtype": "gauge-half",
-      "gstyle": "rounded",
-      "title": "Temp",
-      "units": "ºC",
-      "icon": "",
-      "prefix": "",
-      "suffix": "",
-      "segments": [
-          {
-              "from": "0",
-              "color": "#7fc4e1"
-          },
-          {
-              "from": "15",
-              "color": "#149614"
-          },
-          {
-              "from": "23",
-              "color": "#969600"
-          },
-          {
-              "from": "28",
-              "color": "#8c0000"
-          }
-      ],
-      "min": 0,
-      "max": "35",
-      "sizeThickness": 16,
-      "sizeGap": 4,
-      "sizeKeyThickness": 8,
-      "styleRounded": true,
-      "styleGlow": false,
-      "className": "",
-      "x": 510,
-      "y": 140,
-      "wires": []
-  },
-  {
-      "id": "4d8a34f987d41325",
-      "type": "debug",
-      "z": "4626f4eca8ae462b",
-      "name": "debug RH",
-      "active": true,
-      "tosidebar": true,
-      "console": false,
-      "tostatus": false,
-      "complete": "payload",
-      "targetType": "msg",
-      "statusVal": "",
-      "statusType": "auto",
-      "x": 500,
-      "y": 540,
-      "wires": []
-  },
-  {
-      "id": "f843899b93c676c0",
-      "type": "ui-gauge",
-      "z": "4626f4eca8ae462b",
-      "name": "gauge RH",
-      "group": "9fb18d31c60ab4b8",
-      "order": 1,
-      "width": 5,
-      "height": 3,
-      "gtype": "gauge-half",
-      "gstyle": "rounded",
-      "title": "RH",
-      "units": "%",
-      "icon": "",
-      "prefix": "",
-      "suffix": "",
-      "segments": [
-          {
-              "from": "0",
-              "color": "#969600"
-          },
-          {
-              "from": "40",
-              "color": "#149614"
-          },
-          {
-              "from": "70",
-              "color": "#8c0000"
-          }
-      ],
-      "min": 0,
-      "max": "100",
-      "sizeThickness": 16,
-      "sizeGap": 4,
-      "sizeKeyThickness": 8,
-      "styleRounded": true,
-      "styleGlow": false,
-      "className": "",
-      "x": 500,
-      "y": 500,
-      "wires": []
-  },
-  {
-      "id": "c1f484ba2b33eaa2",
-      "type": "mqtt in",
-      "z": "4626f4eca8ae462b",
-      "name": "mqtt press",
-      "topic": "esp/bme280/pressure",
-      "qos": "2",
-      "datatype": "auto",
-      "broker": "9f9e276987b2fb1f",
-      "nl": false,
-      "rap": true,
-      "rh": 0,
-      "inputs": 0,
-      "x": 120,
-      "y": 380,
-      "wires": [
-          [
-              "0f52cdb46632449a",
-              "a3a2f7d4b23d26b6",
-              "80872d6b9dd9991f",
-              "60fceb4e9c671441",
-              "5c5c148775209589"
-          ]
-      ]
-  },
-  {
-      "id": "0f52cdb46632449a",
-      "type": "ui-chart",
-      "z": "4626f4eca8ae462b",
-      "group": "4bad576b391920a8",
-      "name": "chart Press",
-      "label": "Press (mbar)",
-      "order": 2,
-      "chartType": "line",
-      "category": "topic",
-      "categoryType": "msg",
-      "xAxisLabel": "",
-      "xAxisProperty": "",
-      "xAxisPropertyType": "timestamp",
-      "xAxisType": "time",
-      "xAxisFormat": "",
-      "xAxisFormatType": "auto",
-      "xmin": "",
-      "xmax": "",
-      "yAxisLabel": "",
-      "yAxisProperty": "payload",
-      "yAxisPropertyType": "msg",
-      "ymin": "980",
-      "ymax": "1030",
-      "bins": 10,
-      "action": "append",
-      "stackSeries": false,
-      "pointShape": "false",
-      "pointRadius": "1",
-      "showLegend": true,
-      "removeOlder": 1,
-      "removeOlderUnit": "3600",
-      "removeOlderPoints": "",
-      "colors": [
-          "#50a0e6",
-          "#ff0000",
-          "#ff7f0e",
-          "#51a578",
-          "#a347e1",
-          "#d62728",
-          "#ff9896",
-          "#9467bd",
-          "#c5b0d5"
-      ],
-      "textColor": [
-          "#666666"
-      ],
-      "textColorDefault": true,
-      "gridColor": [
-          "#e5e5e5"
-      ],
-      "gridColorDefault": true,
-      "width": 6,
-      "height": 6,
-      "className": "col1",
-      "interpolation": "linear",
-      "x": 510,
-      "y": 400,
-      "wires": [
-          []
-      ]
-  },
-  {
-      "id": "a3a2f7d4b23d26b6",
-      "type": "debug",
-      "z": "4626f4eca8ae462b",
-      "name": "debug Press",
-      "active": true,
-      "tosidebar": true,
-      "console": false,
-      "tostatus": false,
-      "complete": "payload",
-      "targetType": "msg",
-      "statusVal": "",
-      "statusType": "auto",
-      "x": 510,
-      "y": 360,
-      "wires": []
-  },
-  {
-      "id": "80872d6b9dd9991f",
-      "type": "ui-gauge",
-      "z": "4626f4eca8ae462b",
-      "name": "gauge Press",
-      "group": "4bad576b391920a8",
-      "order": 1,
-      "width": 4,
-      "height": 3,
-      "gtype": "gauge-half",
-      "gstyle": "rounded",
-      "title": "Press",
-      "units": "mbar",
-      "icon": "",
-      "prefix": "",
-      "suffix": "",
-      "segments": [
-          {
-              "from": "900",
-              "color": "#8b9047"
-          },
-          {
-              "from": "970",
-              "color": "#2d872c"
-          },
-          {
-              "from": "1020",
-              "color": "#29b0c2"
-          }
-      ],
-      "min": "900",
-      "max": "1050",
-      "sizeThickness": 16,
-      "sizeGap": 4,
-      "sizeKeyThickness": 8,
-      "styleRounded": true,
-      "styleGlow": false,
-      "className": "",
-      "x": 510,
-      "y": 320,
-      "wires": []
-  },
-  {
-      "id": "60fceb4e9c671441",
-      "type": "ui-chart",
-      "z": "4626f4eca8ae462b",
-      "group": "73528bb91092cced",
-      "name": "chart All",
-      "label": "BME280",
-      "order": 2,
-      "chartType": "line",
-      "category": "topic",
-      "categoryType": "msg",
-      "xAxisLabel": "",
-      "xAxisProperty": "",
-      "xAxisPropertyType": "timestamp",
-      "xAxisType": "time",
-      "xAxisFormat": "",
-      "xAxisFormatType": "auto",
-      "xmin": "",
-      "xmax": "",
-      "yAxisLabel": "",
-      "yAxisProperty": "payload",
-      "yAxisPropertyType": "msg",
-      "ymin": "5",
-      "ymax": "1100",
-      "bins": 10,
-      "action": "append",
-      "stackSeries": false,
-      "pointShape": "false",
-      "pointRadius": "1",
-      "showLegend": true,
-      "removeOlder": "3",
-      "removeOlderUnit": "3600",
-      "removeOlderPoints": "",
-      "colors": [
-          "#b40000",
-          "#13a300",
-          "#0fc3ff",
-          "#2ca02c",
-          "#a347e1",
-          "#d62728",
-          "#ff9896",
-          "#9467bd",
-          "#c5b0d5"
-      ],
-      "textColor": [
-          "#666666"
-      ],
-      "textColorDefault": true,
-      "gridColor": [
-          "#e5e5e5"
-      ],
-      "gridColorDefault": true,
-      "width": 10,
-      "height": 6,
-      "className": "",
-      "interpolation": "linear",
-      "x": 280,
-      "y": 300,
-      "wires": [
-          []
-      ]
-  },
-  {
-      "id": "16e2c7310b4459b7",
-      "type": "function",
-      "z": "4626f4eca8ae462b",
-      "name": "func. Temp",
-      "func": "msg.payload = [\n    { temperature: Number (msg.payload) },\n    {   sensor: \"BME280\",\n        device: \"ESP8266\",\n        room: \"office\"\n    }\n];\nreturn msg;",
-      "outputs": 1,
-      "timeout": 0,
-      "noerr": 0,
-      "initialize": "",
-      "finalize": "",
-      "libs": [],
-      "x": 510,
-      "y": 260,
-      "wires": [
-          [
-              "d2758600007a22ac"
-          ]
-      ]
-  },
-  {
-      "id": "d2758600007a22ac",
-      "type": "influxdb out",
-      "z": "4626f4eca8ae462b",
-      "influxdb": "bcbfe66660dcf8c7",
-      "name": "influx Temp",
-      "measurement": "meteo",
-      "precision": "",
-      "retentionPolicy": "",
-      "database": "database",
-      "precisionV18FluxV20": "s",
-      "retentionPolicyV18Flux": "",
-      "org": "Cimanes",
-      "bucket": "Pi01",
-      "x": 710,
-      "y": 260,
-      "wires": []
-  },
-  {
-      "id": "5c5c148775209589",
-      "type": "function",
-      "z": "4626f4eca8ae462b",
-      "name": "func. Press",
-      "func": "msg.payload = [\n    { pressure: Number (msg.payload) },\n    {   sensor: \"BME280\",\n        device: \"ESP8266\",\n        room: \"office\"\n    }\n];\nreturn msg;",
-      "outputs": 1,
-      "timeout": 0,
-      "noerr": 0,
-      "initialize": "",
-      "finalize": "",
-      "libs": [],
-      "x": 510,
-      "y": 440,
-      "wires": [
-          [
-              "4c21656d105d9a41"
-          ]
-      ]
-  },
-  {
-      "id": "4c21656d105d9a41",
-      "type": "influxdb out",
-      "z": "4626f4eca8ae462b",
-      "influxdb": "bcbfe66660dcf8c7",
-      "name": "influx Press",
-      "measurement": "meteo",
-      "precision": "",
-      "retentionPolicy": "",
-      "database": "database",
-      "precisionV18FluxV20": "s",
-      "retentionPolicyV18Flux": "",
-      "org": "Cimanes",
-      "bucket": "Pi01",
-      "x": 710,
-      "y": 440,
-      "wires": []
-  },
-  {
-      "id": "cff10c52f99ba578",
-      "type": "function",
-      "z": "4626f4eca8ae462b",
-      "name": "func. RH",
-      "func": "msg.payload = [\n    { humidity: Number (msg.payload) },\n    {   sensor: \"BME280\",\n        device: \"ESP8266\",\n        room: \"office\"\n    }\n];\nreturn msg;",
-      "outputs": 1,
-      "timeout": 0,
-      "noerr": 0,
-      "initialize": "",
-      "finalize": "",
-      "libs": [],
-      "x": 500,
-      "y": 620,
-      "wires": [
-          [
-              "cce5b66e0055a7e1"
-          ]
-      ]
-  },
-  {
-      "id": "cce5b66e0055a7e1",
-      "type": "influxdb out",
-      "z": "4626f4eca8ae462b",
-      "influxdb": "bcbfe66660dcf8c7",
-      "name": "influx RH",
-      "measurement": "meteo",
-      "precision": "",
-      "retentionPolicy": "",
-      "database": "database",
-      "precisionV18FluxV20": "s",
-      "retentionPolicyV18Flux": "",
-      "org": "Cimanes",
-      "bucket": "Pi01",
-      "x": 700,
-      "y": 620,
-      "wires": []
-  },
-  {
-      "id": "e090b8954401d58a",
-      "type": "debug",
-      "z": "4626f4eca8ae462b",
-      "name": "debug Interval",
-      "active": true,
-      "tosidebar": true,
-      "console": false,
-      "tostatus": false,
-      "complete": "payload",
-      "targetType": "msg",
-      "statusVal": "",
-      "statusType": "auto",
-      "x": 340,
-      "y": 40,
-      "wires": []
-  },
-  {
-      "id": "79c47b6764732b12",
-      "type": "ui-number-input",
-      "z": "4626f4eca8ae462b",
-      "group": "73528bb91092cced",
-      "name": "BME Interval",
-      "label": "interval",
-      "order": 1,
-      "width": 0,
-      "height": 0,
-      "topic": "topic",
-      "topicType": "msg",
-      "min": 0,
-      "max": "900",
-      "step": "10",
-      "tooltip": "",
-      "passthru": false,
-      "sendOnBlur": false,
-      "sendOnEnter": false,
-      "className": "",
-      "clearable": false,
-      "icon": "",
-      "iconPosition": "left",
-      "iconInnerPosition": "inside",
-      "spinner": "default",
-      "x": 130,
-      "y": 60,
-      "wires": [
-          [
-              "e090b8954401d58a",
-              "b1939cd3dce59041"
-          ]
-      ]
-  },
-  {
-      "id": "b1939cd3dce59041",
-      "type": "mqtt out",
-      "z": "4626f4eca8ae462b",
-      "name": "interval",
-      "topic": "bme/interval",
-      "qos": "2",
-      "retain": "true",
-      "respTopic": "",
-      "contentType": "",
-      "userProps": "",
-      "correl": "",
-      "expiry": "",
-      "broker": "9f9e276987b2fb1f",
-      "x": 320,
-      "y": 80,
-      "wires": []
-  },
-  {
-      "id": "a7c3a74e711d2061",
-      "type": "mqtt out",
-      "z": "6ee6e0e725972070",
-      "name": "GPIO 12",
-      "topic": "esp/digital/12",
-      "qos": "2",
-      "retain": "true",
-      "respTopic": "",
-      "contentType": "",
-      "userProps": "",
-      "correl": "",
-      "expiry": "",
-      "broker": "9f9e276987b2fb1f",
-      "x": 360,
-      "y": 60,
-      "wires": []
-  },
-  {
-      "id": "b8c346de5967093e",
-      "type": "ui-switch",
-      "z": "6ee6e0e725972070",
-      "name": "GPIO 12",
-      "label": "GPIO 12",
-      "group": "eea751cd59c30bc9",
-      "order": 1,
-      "width": 0,
-      "height": 0,
-      "passthru": true,
-      "decouple": false,
-      "topic": "topic",
-      "topicType": "msg",
-      "style": "",
-      "className": "",
-      "layout": "row-spread",
-      "clickableArea": "switch",
-      "onvalue": "true",
-      "onvalueType": "bool",
-      "onicon": "",
-      "oncolor": "",
-      "offvalue": "false",
-      "offvalueType": "bool",
-      "officon": "",
-      "offcolor": "",
-      "x": 160,
-      "y": 60,
-      "wires": [
-          [
-              "a7c3a74e711d2061"
-          ]
-      ]
-  },
-  {
-      "id": "e7484c10d18a08e0",
-      "type": "mqtt out",
-      "z": "6ee6e0e725972070",
-      "name": "GPIO 13",
-      "topic": "esp/digital/13",
-      "qos": "2",
-      "retain": "true",
-      "respTopic": "",
-      "contentType": "",
-      "userProps": "",
-      "correl": "",
-      "expiry": "",
-      "broker": "9f9e276987b2fb1f",
-      "x": 360,
-      "y": 120,
-      "wires": []
-  },
-  {
-      "id": "0fc1aea9f3405373",
-      "type": "ui-switch",
-      "z": "6ee6e0e725972070",
-      "name": "GPIO 13",
-      "label": "GPIO 13",
-      "group": "eea751cd59c30bc9",
-      "order": 2,
-      "width": 0,
-      "height": 0,
-      "passthru": true,
-      "decouple": false,
-      "topic": "topic",
-      "topicType": "msg",
-      "style": "",
-      "className": "",
-      "layout": "row-spread",
-      "clickableArea": "switch",
-      "onvalue": "true",
-      "onvalueType": "bool",
-      "onicon": "",
-      "oncolor": "",
-      "offvalue": "false",
-      "offvalueType": "bool",
-      "officon": "",
-      "offcolor": "",
-      "x": 160,
-      "y": 120,
-      "wires": [
-          [
-              "e7484c10d18a08e0"
-          ]
-      ]
-  },
-  {
-      "id": "2f149303cc7a4594",
-      "type": "mqtt out",
-      "z": "6ee6e0e725972070",
-      "name": "GPIO 15",
-      "topic": "esp/digital/15",
-      "qos": "2",
-      "retain": "true",
-      "respTopic": "",
-      "contentType": "",
-      "userProps": "",
-      "correl": "",
-      "expiry": "",
-      "broker": "9f9e276987b2fb1f",
-      "x": 360,
-      "y": 240,
-      "wires": []
-  },
-  {
-      "id": "0bf646a5ee86c4f7",
-      "type": "ui-switch",
-      "z": "6ee6e0e725972070",
-      "name": "GPIO 15",
-      "label": "GPIO 15",
-      "group": "eea751cd59c30bc9",
-      "order": 4,
-      "width": 0,
-      "height": 0,
-      "passthru": true,
-      "decouple": false,
-      "topic": "topic",
-      "topicType": "msg",
-      "style": "",
-      "className": "",
-      "layout": "row-spread",
-      "clickableArea": "switch",
-      "onvalue": "true",
-      "onvalueType": "bool",
-      "onicon": "",
-      "oncolor": "",
-      "offvalue": "false",
-      "offvalueType": "bool",
-      "officon": "",
-      "offcolor": "",
-      "x": 160,
-      "y": 240,
-      "wires": [
-          [
-              "2f149303cc7a4594"
-          ]
-      ]
-  },
-  {
-      "id": "c120391591a4b172",
-      "type": "mqtt out",
-      "z": "6ee6e0e725972070",
-      "name": "GPIO 14",
-      "topic": "esp/digital/14",
-      "qos": "2",
-      "retain": "true",
-      "respTopic": "",
-      "contentType": "",
-      "userProps": "",
-      "correl": "",
-      "expiry": "",
-      "broker": "9f9e276987b2fb1f",
-      "x": 360,
-      "y": 180,
-      "wires": []
-  },
-  {
-      "id": "985d3512e085a926",
-      "type": "ui-switch",
-      "z": "6ee6e0e725972070",
-      "name": "GPIO 14",
-      "label": "GPIO 14",
-      "group": "eea751cd59c30bc9",
-      "order": 3,
-      "width": 0,
-      "height": 0,
-      "passthru": true,
-      "decouple": false,
-      "topic": "topic",
-      "topicType": "msg",
-      "style": "",
-      "className": "",
-      "layout": "row-spread",
-      "clickableArea": "switch",
-      "onvalue": "true",
-      "onvalueType": "bool",
-      "onicon": "",
-      "oncolor": "",
-      "offvalue": "false",
-      "offvalueType": "bool",
-      "officon": "",
-      "offcolor": "",
-      "x": 160,
-      "y": 180,
-      "wires": [
-          [
-              "c120391591a4b172"
-          ]
-      ]
-  },
-  {
-      "id": "6079a9a3b2d06b08",
-      "type": "debug",
-      "z": "6ee6e0e725972070",
-      "name": "ESP Debug",
-      "active": true,
-      "tosidebar": true,
-      "console": false,
-      "tostatus": false,
-      "complete": "payload",
-      "targetType": "msg",
-      "statusVal": "",
-      "statusType": "auto",
-      "x": 350,
-      "y": 320,
-      "wires": []
-  },
-  {
-      "id": "4f3ec602bbdddf02",
-      "type": "mqtt out",
-      "z": "6ee6e0e725972070",
-      "name": "debug",
-      "topic": "esp/debug",
-      "qos": "2",
-      "retain": "true",
-      "respTopic": "",
-      "contentType": "",
-      "userProps": "",
-      "correl": "",
-      "expiry": "",
-      "broker": "9f9e276987b2fb1f",
-      "x": 330,
-      "y": 360,
-      "wires": []
-  },
-  {
-      "id": "9021d18f82f4ac42",
-      "type": "ui-switch",
-      "z": "6ee6e0e725972070",
-      "name": "Debug",
-      "label": "Debug",
-      "group": "6802e7f370cd4a31",
-      "order": 1,
-      "width": 0,
-      "height": 0,
-      "passthru": false,
-      "decouple": false,
-      "topic": "topic",
-      "topicType": "msg",
-      "style": "",
-      "className": "",
-      "layout": "row-spread",
-      "clickableArea": "switch",
-      "onvalue": "true",
-      "onvalueType": "bool",
-      "onicon": "",
-      "oncolor": "",
-      "offvalue": "false",
-      "offvalueType": "bool",
-      "officon": "",
-      "offcolor": "",
-      "x": 150,
-      "y": 340,
-      "wires": [
-          [
-              "4f3ec602bbdddf02",
-              "6079a9a3b2d06b08"
-          ]
-      ]
-  }
+    {
+        "id": "4626f4eca8ae462b",
+        "type": "tab",
+        "label": "BME280",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9f9e276987b2fb1f",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "77e83d514b9bd6e2",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": true,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true
+    },
+    {
+        "id": "f633910aef2e9d8b",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#282828",
+            "primary": "#00a1e0",
+            "bgPage": "#000000",
+            "groupBg": "#afafaf",
+            "groupOutline": "#0d0d0d"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "f244d991d7d0735a",
+        "type": "ui-page",
+        "name": "BME280",
+        "ui": "77e83d514b9bd6e2",
+        "path": "/page1",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "f633910aef2e9d8b",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 1,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "32d4771e3f2730dd",
+        "type": "ui-group",
+        "name": "Temp",
+        "page": "f244d991d7d0735a",
+        "width": 4,
+        "height": "4",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "9fb18d31c60ab4b8",
+        "type": "ui-group",
+        "name": "RH",
+        "page": "f244d991d7d0735a",
+        "width": 4,
+        "height": 1,
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "4bad576b391920a8",
+        "type": "ui-group",
+        "name": "Press",
+        "page": "f244d991d7d0735a",
+        "width": 4,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "73528bb91092cced",
+        "type": "ui-group",
+        "name": "BME Control",
+        "page": "f244d991d7d0735a",
+        "width": 4,
+        "height": 1,
+        "order": 4,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "c72da1dec48c5176",
+        "type": "ui-page",
+        "name": "Controls",
+        "ui": "77e83d514b9bd6e2",
+        "path": "/page2",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "f633910aef2e9d8b",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 2,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "eea751cd59c30bc9",
+        "type": "ui-group",
+        "name": "Thermostat control",
+        "page": "c72da1dec48c5176",
+        "width": 5,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "bcbfe66660dcf8c7",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "Database",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "https://eu-central-1-1.aws.cloud2.influxdata.com",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "6802e7f370cd4a31",
+        "type": "ui-group",
+        "name": "Debug",
+        "page": "c72da1dec48c5176",
+        "width": 2,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "d6e3075763187749",
+        "type": "remote-config",
+        "name": "Node-RED UI",
+        "host": "localhost",
+        "protocol": "http",
+        "port": "1880",
+        "baseurl": "/dashboard",
+        "instancehash": "r67sl13xtep6x1vv38rihaj1ub7v4d15j0dwa662ihdhr87ysmfpwtmxj62bg1wt",
+        "server": "nodered02.remote-red.com",
+        "region": "de"
+    },
+    {
+        "id": "e488625c59b3303a",
+        "type": "mqtt in",
+        "z": "4626f4eca8ae462b",
+        "name": "mqtt temp",
+        "topic": "esp/bme280/temperature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "9f9e276987b2fb1f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 660,
+        "wires": [
+            [
+                "94f7ce855f618ec2",
+                "d12973a308a7b49f",
+                "16e2c7310b4459b7",
+                "a0390b54468a2897",
+                "a4260a344cef445b"
+            ]
+        ]
+    },
+    {
+        "id": "3d9e45e6a54996fe",
+        "type": "mqtt in",
+        "z": "4626f4eca8ae462b",
+        "name": "mqtt hum",
+        "topic": "esp/bme280/humidity",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "9f9e276987b2fb1f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 500,
+        "wires": [
+            [
+                "a106edce8b444678",
+                "f843899b93c676c0",
+                "cff10c52f99ba578"
+            ]
+        ]
+    },
+    {
+        "id": "a106edce8b444678",
+        "type": "ui-chart",
+        "z": "4626f4eca8ae462b",
+        "group": "9fb18d31c60ab4b8",
+        "name": "chart RH",
+        "label": "RH (%)",
+        "order": 2,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "10",
+        "ymax": "90",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "false",
+        "pointRadius": "1",
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#33aa33",
+            "#ff0000",
+            "#ff7f0e",
+            "#51a5e6",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 6,
+        "className": "col1",
+        "interpolation": "linear",
+        "x": 400,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "94f7ce855f618ec2",
+        "type": "ui-chart",
+        "z": "4626f4eca8ae462b",
+        "group": "32d4771e3f2730dd",
+        "name": "chart Temp",
+        "label": "Temp (ºC)",
+        "order": 2,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "0",
+        "ymax": "35",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "false",
+        "pointRadius": "1",
+        "showLegend": true,
+        "removeOlder": "3",
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#a51818",
+            "#2c99dd",
+            "#ff7f0e",
+            "#2ca02c",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 6,
+        "className": "",
+        "interpolation": "linear",
+        "x": 490,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d12973a308a7b49f",
+        "type": "ui-gauge",
+        "z": "4626f4eca8ae462b",
+        "name": "gauge Temp",
+        "group": "32d4771e3f2730dd",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Temp",
+        "units": "ºC",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#7fc4e1"
+            },
+            {
+                "from": "15",
+                "color": "#149614"
+            },
+            {
+                "from": "23",
+                "color": "#969600"
+            },
+            {
+                "from": "28",
+                "color": "#8c0000"
+            }
+        ],
+        "min": 0,
+        "max": "35",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 490,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "f843899b93c676c0",
+        "type": "ui-gauge",
+        "z": "4626f4eca8ae462b",
+        "name": "gauge RH",
+        "group": "9fb18d31c60ab4b8",
+        "order": 1,
+        "width": 5,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "RH",
+        "units": "%",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "0",
+                "color": "#969600"
+            },
+            {
+                "from": "40",
+                "color": "#149614"
+            },
+            {
+                "from": "70",
+                "color": "#8c0000"
+            }
+        ],
+        "min": 0,
+        "max": "100",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 400,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "c1f484ba2b33eaa2",
+        "type": "mqtt in",
+        "z": "4626f4eca8ae462b",
+        "name": "mqtt press",
+        "topic": "esp/bme280/pressure",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "9f9e276987b2fb1f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 360,
+        "wires": [
+            [
+                "0f52cdb46632449a",
+                "80872d6b9dd9991f",
+                "5c5c148775209589",
+                "efc8cfa8423166c2"
+            ]
+        ]
+    },
+    {
+        "id": "0f52cdb46632449a",
+        "type": "ui-chart",
+        "z": "4626f4eca8ae462b",
+        "group": "4bad576b391920a8",
+        "name": "chart Press",
+        "label": "Press (mbar)",
+        "order": 2,
+        "chartType": "line",
+        "category": "topic",
+        "categoryType": "msg",
+        "xAxisLabel": "",
+        "xAxisProperty": "",
+        "xAxisPropertyType": "timestamp",
+        "xAxisType": "time",
+        "xAxisFormat": "",
+        "xAxisFormatType": "auto",
+        "xmin": "",
+        "xmax": "",
+        "yAxisLabel": "",
+        "yAxisProperty": "payload",
+        "yAxisPropertyType": "msg",
+        "ymin": "980",
+        "ymax": "1030",
+        "bins": 10,
+        "action": "append",
+        "stackSeries": false,
+        "pointShape": "false",
+        "pointRadius": "1",
+        "showLegend": true,
+        "removeOlder": 1,
+        "removeOlderUnit": "3600",
+        "removeOlderPoints": "",
+        "colors": [
+            "#50a0e6",
+            "#ff0000",
+            "#ff7f0e",
+            "#51a578",
+            "#a347e1",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "textColor": [
+            "#666666"
+        ],
+        "textColorDefault": true,
+        "gridColor": [
+            "#e5e5e5"
+        ],
+        "gridColorDefault": true,
+        "width": 6,
+        "height": 6,
+        "className": "col1",
+        "interpolation": "linear",
+        "x": 410,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "80872d6b9dd9991f",
+        "type": "ui-gauge",
+        "z": "4626f4eca8ae462b",
+        "name": "gauge Press",
+        "group": "4bad576b391920a8",
+        "order": 1,
+        "width": 4,
+        "height": 3,
+        "gtype": "gauge-half",
+        "gstyle": "rounded",
+        "title": "Press",
+        "units": "mbar",
+        "icon": "",
+        "prefix": "",
+        "suffix": "",
+        "segments": [
+            {
+                "from": "900",
+                "color": "#8b9047"
+            },
+            {
+                "from": "970",
+                "color": "#2d872c"
+            },
+            {
+                "from": "1020",
+                "color": "#29b0c2"
+            }
+        ],
+        "min": "900",
+        "max": "1050",
+        "sizeThickness": 16,
+        "sizeGap": 4,
+        "sizeKeyThickness": 8,
+        "styleRounded": true,
+        "styleGlow": false,
+        "className": "",
+        "x": 410,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "16e2c7310b4459b7",
+        "type": "function",
+        "z": "4626f4eca8ae462b",
+        "name": "func. Temp",
+        "func": "msg.payload = [\n    { temperature: Number (msg.payload) },\n    {   sensor: \"BME280\",\n        device: \"ESP8266\",\n        room: \"office\"\n    }\n];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 600,
+        "wires": [
+            [
+                "d2758600007a22ac"
+            ]
+        ]
+    },
+    {
+        "id": "d2758600007a22ac",
+        "type": "influxdb out",
+        "z": "4626f4eca8ae462b",
+        "influxdb": "bcbfe66660dcf8c7",
+        "name": "influx Temp",
+        "measurement": "meteo",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Cimanes",
+        "bucket": "Pi01",
+        "x": 650,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "5c5c148775209589",
+        "type": "function",
+        "z": "4626f4eca8ae462b",
+        "name": "func. Press",
+        "func": "msg.payload = [\n    { pressure: Number (msg.payload) },\n    {   sensor: \"BME280\",\n        device: \"ESP8266\",\n        room: \"office\"\n    }\n];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 300,
+        "wires": [
+            [
+                "4c21656d105d9a41"
+            ]
+        ]
+    },
+    {
+        "id": "4c21656d105d9a41",
+        "type": "influxdb out",
+        "z": "4626f4eca8ae462b",
+        "influxdb": "bcbfe66660dcf8c7",
+        "name": "influx Press",
+        "measurement": "meteo",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Cimanes",
+        "bucket": "Pi01",
+        "x": 590,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "cff10c52f99ba578",
+        "type": "function",
+        "z": "4626f4eca8ae462b",
+        "name": "func. RH",
+        "func": "msg.payload = [\n    { humidity: Number (msg.payload) },\n    {   sensor: \"BME280\",\n        device: \"ESP8266\",\n        room: \"office\"\n    }\n];\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 460,
+        "wires": [
+            [
+                "cce5b66e0055a7e1"
+            ]
+        ]
+    },
+    {
+        "id": "cce5b66e0055a7e1",
+        "type": "influxdb out",
+        "z": "4626f4eca8ae462b",
+        "influxdb": "bcbfe66660dcf8c7",
+        "name": "influx RH",
+        "measurement": "meteo",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "Cimanes",
+        "bucket": "Pi01",
+        "x": 580,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "79c47b6764732b12",
+        "type": "ui-number-input",
+        "z": "4626f4eca8ae462b",
+        "group": "73528bb91092cced",
+        "name": "BME Interval",
+        "label": "interval",
+        "order": 3,
+        "width": 2,
+        "height": 0,
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "900",
+        "step": "10",
+        "tooltip": "",
+        "passthru": false,
+        "sendOnBlur": false,
+        "sendOnEnter": false,
+        "className": "",
+        "clearable": false,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "spinner": "default",
+        "x": 330,
+        "y": 220,
+        "wires": [
+            [
+                "b1939cd3dce59041"
+            ]
+        ]
+    },
+    {
+        "id": "b1939cd3dce59041",
+        "type": "mqtt out",
+        "z": "4626f4eca8ae462b",
+        "name": "interval",
+        "topic": "bme/interval",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f9e276987b2fb1f",
+        "x": 500,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "215dee209d72530c",
+        "type": "remote-access",
+        "z": "4626f4eca8ae462b",
+        "confignode": "d6e3075763187749",
+        "name": "Remote",
+        "verbose": 0,
+        "x": 110,
+        "y": 60,
+        "wires": [
+            [],
+            []
+        ]
+    },
+    {
+        "id": "91813f95d282a508",
+        "type": "comment",
+        "z": "4626f4eca8ae462b",
+        "name": "Node-red remote",
+        "info": "Server for \"Node-red Remote\" app",
+        "x": 80,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "9494b06157cb96f2",
+        "type": "comment",
+        "z": "4626f4eca8ae462b",
+        "name": "BME Control",
+        "info": "1)  Button to trigger BME reading\n    Commans new reading and resets timer\n\n2)  Numeric input field (user entry).\n    Defines BME280 sampling interval.",
+        "x": 70,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "329c5f5460d2b106",
+        "type": "comment",
+        "z": "4626f4eca8ae462b",
+        "name": "BME Readings",
+        "info": "Receive BME readings via MQTT protocol\nTemperature, pressure and Rel. Humidity.\nFor each variable:\n- Display value in a gaugge.\n- Record a chart trend.\n- Send to Influx Data Base.\n- Send to the Debug console.\n\n",
+        "x": 80,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "a7c3a74e711d2061",
+        "type": "mqtt out",
+        "z": "4626f4eca8ae462b",
+        "name": "GPIO 02",
+        "topic": "esp/digital/2",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f9e276987b2fb1f",
+        "x": 540,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "b8c346de5967093e",
+        "type": "ui-switch",
+        "z": "4626f4eca8ae462b",
+        "name": "ESP LED",
+        "label": "LED",
+        "group": "eea751cd59c30bc9",
+        "order": 6,
+        "width": 1,
+        "height": 0,
+        "passthru": true,
+        "decouple": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "layout": "row-left",
+        "clickableArea": "switch",
+        "onvalue": "false",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "true",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 300,
+        "y": 1060,
+        "wires": [
+            [
+                "a7c3a74e711d2061"
+            ]
+        ]
+    },
+    {
+        "id": "e7484c10d18a08e0",
+        "type": "mqtt out",
+        "z": "4626f4eca8ae462b",
+        "name": "GPIO 13",
+        "topic": "esp/digital/13",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f9e276987b2fb1f",
+        "x": 540,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "0fc1aea9f3405373",
+        "type": "ui-switch",
+        "z": "4626f4eca8ae462b",
+        "name": "Boiler",
+        "label": "Boiler",
+        "group": "eea751cd59c30bc9",
+        "order": 4,
+        "width": 2,
+        "height": 0,
+        "passthru": true,
+        "decouple": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "layout": "row-left",
+        "clickableArea": "switch",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 90,
+        "y": 1000,
+        "wires": [
+            [
+                "e7484c10d18a08e0"
+            ]
+        ]
+    },
+    {
+        "id": "2f149303cc7a4594",
+        "type": "mqtt out",
+        "z": "4626f4eca8ae462b",
+        "name": "GPIO 15",
+        "topic": "esp/digital/15",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f9e276987b2fb1f",
+        "x": 780,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "0bf646a5ee86c4f7",
+        "type": "ui-switch",
+        "z": "4626f4eca8ae462b",
+        "name": "Heating",
+        "label": "Heating",
+        "group": "eea751cd59c30bc9",
+        "order": 5,
+        "width": 2,
+        "height": 0,
+        "passthru": true,
+        "decouple": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "layout": "row-left",
+        "clickableArea": "switch",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 640,
+        "y": 880,
+        "wires": [
+            [
+                "2f149303cc7a4594"
+            ]
+        ]
+    },
+    {
+        "id": "1db3d67dd222a70a",
+        "type": "comment",
+        "z": "4626f4eca8ae462b",
+        "name": "Thermostat control",
+        "info": "Switches to control ESP digital outputs.\nSignals sent via MQTT protocol to ESP device.\nThe topic is: esp/digital/xx\n\"xx\" is the GPIO number\nThe ESP will identify this number.",
+        "x": 90,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "b56b0a394afb449e",
+        "type": "ui-slider",
+        "z": "4626f4eca8ae462b",
+        "group": "eea751cd59c30bc9",
+        "name": "Thermostat",
+        "label": "Thermostat",
+        "tooltip": "",
+        "order": 3,
+        "width": 4,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "esp/control/setpoint",
+        "topicType": "str",
+        "thumbLabel": "true",
+        "showTicks": "true",
+        "min": "5",
+        "max": "35",
+        "step": "0.5",
+        "className": "",
+        "iconPrepend": "",
+        "iconAppend": "",
+        "color": "",
+        "colorTrack": "",
+        "colorThumb": "",
+        "showTextField": true,
+        "x": 290,
+        "y": 880,
+        "wires": [
+            [
+                "97a7beecb9fc4a58",
+                "94f7ce855f618ec2"
+            ]
+        ]
+    },
+    {
+        "id": "97a7beecb9fc4a58",
+        "type": "function",
+        "z": "4626f4eca8ae462b",
+        "name": "func. thermostat",
+        "func": "\nlet setpoint = Number(msg.payload),\n    feedback = Number(flow.get(\"temp\")),\n    db = Number(flow.get(\"deadband\")),\n    heater = (setpoint - feedback) > db;\n\nlet newMsg = { \n    payload: heater, \n    topic: \"esp/control/heater\",\n    setpoint: setpoint,\n    feedback: feedback,\n    db: db \n    };\nreturn newMsg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 880,
+        "wires": [
+            [
+                "0bf646a5ee86c4f7"
+            ]
+        ]
+    },
+    {
+        "id": "a0390b54468a2897",
+        "type": "change",
+        "z": "4626f4eca8ae462b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "temp",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 490,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cc7b1e9ae57a305a",
+        "type": "ui-number-input",
+        "z": "4626f4eca8ae462b",
+        "group": "eea751cd59c30bc9",
+        "name": "Input Deadband",
+        "label": "Deadband",
+        "order": 2,
+        "width": 2,
+        "height": 0,
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "2",
+        "step": "0.1",
+        "tooltip": "Thermostat deadband",
+        "passthru": false,
+        "sendOnBlur": false,
+        "sendOnEnter": false,
+        "className": "",
+        "clearable": false,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "spinner": "default",
+        "x": 300,
+        "y": 940,
+        "wires": [
+            [
+                "c54f924022035ee9"
+            ]
+        ]
+    },
+    {
+        "id": "c54f924022035ee9",
+        "type": "change",
+        "z": "4626f4eca8ae462b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "deadband",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e65f6f58f7f0898a",
+        "type": "inject",
+        "z": "4626f4eca8ae462b",
+        "name": "Init. Deadband",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "0.5",
+        "payloadType": "num",
+        "x": 120,
+        "y": 940,
+        "wires": [
+            [
+                "cc7b1e9ae57a305a"
+            ]
+        ]
+    },
+    {
+        "id": "8b4b7cc838b9e2da",
+        "type": "inject",
+        "z": "4626f4eca8ae462b",
+        "name": "Init. Thermostat",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "esp/control/setpoint",
+        "payload": "19",
+        "payloadType": "num",
+        "x": 120,
+        "y": 880,
+        "wires": [
+            [
+                "b56b0a394afb449e"
+            ]
+        ]
+    },
+    {
+        "id": "64c60beb8a3f6758",
+        "type": "inject",
+        "z": "4626f4eca8ae462b",
+        "name": "Init. Interval",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "esp/control/interval",
+        "payload": "900",
+        "payloadType": "num",
+        "x": 150,
+        "y": 220,
+        "wires": [
+            [
+                "79c47b6764732b12"
+            ]
+        ]
+    },
+    {
+        "id": "1dcf111b2594c8bd",
+        "type": "ui-button",
+        "z": "4626f4eca8ae462b",
+        "group": "73528bb91092cced",
+        "name": "BME Trigger",
+        "label": "Trigger",
+        "order": 2,
+        "width": 2,
+        "height": 0,
+        "emulateClick": true,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 330,
+        "y": 160,
+        "wires": [
+            [
+                "d527ab69da44aabb"
+            ]
+        ]
+    },
+    {
+        "id": "4f3ec602bbdddf02",
+        "type": "mqtt out",
+        "z": "4626f4eca8ae462b",
+        "name": "debug",
+        "topic": "esp/debug",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f9e276987b2fb1f",
+        "x": 310,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "9021d18f82f4ac42",
+        "type": "ui-switch",
+        "z": "4626f4eca8ae462b",
+        "name": "ESP Debug",
+        "label": "Debug",
+        "group": "6802e7f370cd4a31",
+        "order": 1,
+        "width": 1,
+        "height": 0,
+        "passthru": false,
+        "decouple": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "layout": "row-spread",
+        "clickableArea": "switch",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 150,
+        "y": 1200,
+        "wires": [
+            [
+                "4f3ec602bbdddf02"
+            ]
+        ]
+    },
+    {
+        "id": "5afe0fd6fdbf0fa3",
+        "type": "comment",
+        "z": "4626f4eca8ae462b",
+        "name": "ESP Debug",
+        "info": "Switch to enable/disable Serial debug.\nSignal (true/false) sent via MQTT.\nMQTT topic is \"esp/debug\"\nBoolean signal \"espDebug\" in device.\nSignal iscontrolled by this switch.\n",
+        "x": 70,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "a4260a344cef445b",
+        "type": "ui-text",
+        "z": "4626f4eca8ae462b",
+        "group": "eea751cd59c30bc9",
+        "order": 1,
+        "width": 2,
+        "height": 0,
+        "name": "Temp",
+        "label": "Temp:     ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 330,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "d527ab69da44aabb",
+        "type": "mqtt out",
+        "z": "4626f4eca8ae462b",
+        "name": "trigger",
+        "topic": "bme/trigger",
+        "qos": "2",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f9e276987b2fb1f",
+        "x": 490,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "38b3cdbe6b847602",
+        "type": "inject",
+        "z": "4626f4eca8ae462b",
+        "name": "Init. Trigger",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "bme/trigger",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "1dcf111b2594c8bd"
+            ]
+        ]
+    },
+    {
+        "id": "efc8cfa8423166c2",
+        "type": "change",
+        "z": "4626f4eca8ae462b",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$moment().format(\"DD/MM HH:mm:ss\")",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 420,
+        "wires": [
+            [
+                "9a848e28c93fdcd4"
+            ]
+        ]
+    },
+    {
+        "id": "9a848e28c93fdcd4",
+        "type": "ui-text",
+        "z": "4626f4eca8ae462b",
+        "group": "73528bb91092cced",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "Last reading",
+        "label": "Last reading:  ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 650,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "d0f6e59001652ed4",
+        "type": "inject",
+        "z": "4626f4eca8ae462b",
+        "name": "Init. LED OFF",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 120,
+        "y": 1060,
+        "wires": [
+            [
+                "b8c346de5967093e"
+            ]
+        ]
+    }
 ]

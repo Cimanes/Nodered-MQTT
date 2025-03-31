@@ -24,6 +24,7 @@ const char* pubTopics[] = {
 #define MQTT_SUB_DEBUG "esp/debug"
 #define MQTT_SUB_DIGITAL "esp/digital/#"
 #define MQTT_SUB_INTERVAL "bme/interval"
+#define MQTT_SUB_TRIGGER "bme/trigger"
 
 //======================================
 // FUNCTIONS
@@ -56,10 +57,11 @@ void onmqttConnect(bool sessionPresent) {
   const char* subTopics[] = {
     MQTT_SUB_DIGITAL,
     MQTT_SUB_INTERVAL,
-    MQTT_SUB_DEBUG
+    MQTT_SUB_DEBUG,
+    MQTT_SUB_TRIGGER
   };
   const byte subLen = sizeof(subTopics) / sizeof(subTopics[0]);
-  for (int i = 0; i < subLen; i++) {
+  for (byte i = 0; i < subLen; i++) {
     uint16_t packetIdSub = mqttClient.subscribe(subTopics[i], 2);
     if(espDebug) {
       Serial.print(F("Subscribing at QoS 2, packetId: "));  
@@ -149,6 +151,18 @@ void onmqttMessage(char* topic, char* payload, AsyncMqttClientMessageProperties 
       Serial.println(espDebug);
     }
     return;
+  }
+
+  // Trigger BME reading
+  else if (!!strstr(topic, "trigger")) {
+    if (espDebug) { Serial.print(F("BME reading triggered")); }
+    timer.deleteTimer(BMETimerID);
+    readBME();
+    publishMqtt(pubTopics, values, sizeof(pubTopics)/sizeof(pubTopics[0]));
+    BMETimerID = timer.setInterval(interval, []() {
+      readBME();
+      publishMqtt(pubTopics, values, sizeof(pubTopics)/sizeof(pubTopics[0]));
+    });
   }
 }
 
