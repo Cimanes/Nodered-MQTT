@@ -22,4 +22,4 @@ unsigned long BMETimerID;
 // Global variables to control timers
 unsigned long mqttReconnectTimerID;   // Timer to reconnect to MQTT after failed
 unsigned long wifiReconnectTimerID;   // TImer to reconnect to WiFi after failed
-unsigned long interval = 30000; // Interval at which to publish values
+unsigned long interval = 300000; // Interval at which to publish values

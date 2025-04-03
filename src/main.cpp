@@ -1,6 +1,6 @@
-#include "globals.h"
-#include "bme.h"
-#include "mqtt.h"
+#include "01_globals.hpp"
+#include "02_bme.hpp"
+#include "03_mqtt.hpp"
 
 //=======================================
 //Handle WiFi events
