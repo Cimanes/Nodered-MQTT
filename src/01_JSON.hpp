@@ -54,11 +54,9 @@ void makeJsonString(const char* key, const char* value) {
  * @param keys Array of keys (strings).
  * @param values Array of values (integers) corresponding to the keys.
  */
-void makeJsonArray(const byte numKeys, const char* keys[], uint16_t values[]) {
+void makeJsonArray(const byte numKeys, const char* keys[], int16_t values[]) {
   jsonDoc.clear();  // Clear the document to avoid leftover data
-
   for (byte i = 0; i < numKeys; i++)  { jsonDoc[keys[i]] = values[i]; }
-
   serializeJson(jsonDoc, msg, sizeof(msg)); // Convert jsonDoc to char array
-  if (Debug) Serial.println(msg);             // Optional debug output
+  // if (Debug) Serial.println(msg);             // Optional debug output
 }

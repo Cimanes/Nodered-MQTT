@@ -15,8 +15,8 @@ unsigned long mqttReconnectTimerID; // Timer to reconnect to MQTT after failed
 #define BROKER_PASS "Naya-1006"   // MQTT BROKER PASSWORD
 
 // Arrays of Pub and Sub Topics
-const char* bmeTopics[] = { "bme/temp", "bme/hum", "bme/pres" };
-const byte numBmeTopics = sizeof(bmeTopics) / sizeof(bmeTopics[0]);
+const char* bmeKeys[] = { "temp", "hum", "pres" };
+const byte numBmeKeys = sizeof(bmeKeys) / sizeof(bmeKeys[0]);
 
 //======================================
 // FUNCTIONS
@@ -32,7 +32,7 @@ void connectToMqtt() {
  * @param values Array of float values to publish.
  * @param numTopics Number of topics to publish to.
  */
-void publishArray(const char* topics[], int16_t values[], byte numTopics) {
+void publishArray_OLD(const char* topics[], int16_t values[], byte numTopics) {
   if (Debug) Serial.println(F("Publishing..."));
   static char payload[6];  // Static buffer to reduce stack usage
 
@@ -43,6 +43,22 @@ void publishArray(const char* topics[], int16_t values[], byte numTopics) {
     if (Debug) { Serial.println(topics[i]); }
   }
 }
+
+void publishArray(const char* topic, const char* keys[], int16_t values[], byte numKeys) {
+  if (Debug) Serial.println(F("Publishing..."));
+  makeJsonArray(numKeys, keys, values);
+  mqttClient.publish(topic, 1, true, msg);
+  if (Debug) { Serial.println(msg); }
+}
+
+
+
+
+
+
+
+
+
 
 void publishInt(const char* topic, uint16_t value) {
   static char payload[6];  // Static buffer to reduce stack usage
@@ -67,7 +83,7 @@ void publishBool(const char* topic, bool value) {
 
 void publishBME() {
   readBME();
-  publishArray(bmeTopics, bmeValues, numBmeTopics);    
+  publishArray("bme", bmeKeys, bmeValues, numBmeKeys);    
 }
 
 // Subscribe 
@@ -112,11 +128,10 @@ void onmqttUnsubscribe(uint16_t packetId) {
  * @param total The total size of the message.
  */
 
-void onmqttMessage(const char* topic, const char* payload, AsyncMqttClientMessageProperties properties, size_t len, size_t index, size_t total) {
+void onmqttMessage(const char* topic, const char* payload, const AsyncMqttClientMessageProperties properties, size_t len, size_t index, size_t total) {
   if (Debug) {
     Serial.print(F("Received "));
-    Serial.println(topic);
-    // Serial.printf("payload: %s \n", payload);
+    Serial.printf("topic: %s, payload: %s\n", topic, payload);
     // More properties available:
     // Serial.printf("Pub received. \n topic: %s, qos: %i, dup: %i, retain: %i, len: %i, index: %i, total: %i \n", topic, properties.qos, properties.dup, properties.retain, len, index, total);
   }
@@ -125,7 +140,7 @@ void onmqttMessage(const char* topic, const char* payload, AsyncMqttClientMessag
     // Check which GPIO we want to control
     const char* gpioStr = strstr(topic, "gpio/") + 5; // skip "gpio/"
     int gpio = atoi(gpioStr);
-    bool out = !strncmp(payload, "true", len);
+    bool out = !strncmp(payload, "1", len);
     digitalWrite(gpio, out);
     return;
   }
@@ -145,7 +160,7 @@ void onmqttMessage(const char* topic, const char* payload, AsyncMqttClientMessag
 
   // Change debug level
   else if (strstr(topic, "debug")) {
-    Debug = (!strncmp(payload, "true", len));  // set Debug per payload
+    Debug = (!strncmp(payload, "1", len));  // set Debug per payload
     if (Debug) {
       Serial.print(F("Debug: "));
       Serial.println(Debug);
@@ -155,16 +170,16 @@ void onmqttMessage(const char* topic, const char* payload, AsyncMqttClientMessag
 
   // Trigger BME reading
   else if (strstr(topic, "read")) {
-    if (Debug) { Serial.println(F("Read BME")); }
-    timer.deleteTimer(BMETimerID);
+    // if (Debug) { Serial.println(F("Read BME")); }
+    // timer.deleteTimer(BMETimerID);
     publishBME();
-    BMETimerID = timer.setInterval(bmeInterval, publishBME);
+    // BMETimerID = timer.setInterval(bmeInterval, publishBME);
   }
 }
 
 void onmqttPublish(uint16_t packetId) {
   if (Debug) {
-    Serial.print(F("Pub OK. Packet#: "));
+    Serial.print(F("Pub OK. #"));
     Serial.println(packetId);
   }
 }
@@ -179,5 +194,5 @@ void initMqtt() {
   mqttClient.onPublish(onmqttPublish);
   mqttClient.setServer(MQTT_HOST, MQTT_PORT);
   mqttClient.setCredentials(BROKER_USER, BROKER_PASS);
-  if (Debug) Serial.println(F("initMQTT done"));
+  if (Debug) Serial.println(F("init MQTT done"));
 }

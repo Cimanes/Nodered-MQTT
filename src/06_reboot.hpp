@@ -23,5 +23,5 @@ void initReboot() { // Request to delete data file
     reboot = true;
     request->send(200);
   });
-  rebootTimer = timer.setInterval(1000, checkReboot);
+  rebootTimer = timer.setInterval(2000, checkReboot);
 }
