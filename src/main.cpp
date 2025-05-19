@@ -1,50 +1,37 @@
-#include "01_globals.hpp"
-#include "02_bme.hpp"
-#include "03_mqtt.hpp"
+#include "00_globals.hpp"
+// #include "01_json.hpp"
+#include "02_fileSys.hpp"
+#include "03_wifi.hpp"
+#include "04_bme.hpp"
+#include "05_mqtt.hpp"
+#include "06_reboot.hpp"
 
 //=======================================
-//Handle WiFi events
+// GLOBAL FUNCTIONS
 //=======================================
-void connectToWifi() {
-  if(espDebug) Serial.println(F("Connecting to Wi-Fi..."));
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
-}
-
 void onwifiConnect(const WiFiEventStationModeGotIP& event) {
-  if(espDebug) {
-    if(espDebug) {    
-      Serial.print(F("Connected to Wi-Fi. IP: "));
-      Serial.println(WiFi.localIP());
-    }
-  }
+  initMqtt();
   connectToMqtt();
 }
 
 void onwifiDisconnect(const WiFiEventStationModeDisconnected& event) {
-  if (espDebug)   Serial.println(F("Disconnected from Wi-Fi."));
+  if (Debug)   Serial.println(F("Wifi disconnected."));
   timer.deleteTimer(mqttReconnectTimerID);  // ensure we don't reconnect to MQTT while reconnecting to Wi-Fi
-  wifiReconnectTimerID = timer.setTimeout(2000, connectToWifi); // attempt to reconnect to WiFi
+  timer.setTimeout(2000, connectToWifi); // attempt to reconnect to WiFi
 }
-//============================================
-
 
 
 void setup() {
   Serial.begin(115200);
-  pinMode (LED_BUILTIN, OUTPUT);
-
-  wifiConnectHandler = WiFi.onStationModeGotIP(onwifiConnect);
-  wifiDisconnectHandler = WiFi.onStationModeDisconnected(onwifiDisconnect);
-
-  initMqtt();
+  initReboot();   // Initialize Reboot
+  initFS();       // Initialize File System
+  initGPIO();     // Initialize GPIO  
   initBME();
+  // Initialize wifi and MQTT
+  wifiDisconnectHandler = WiFi.onStationModeDisconnected(onwifiDisconnect);
+  wifiConnectHandler = WiFi.onStationModeGotIP(onwifiConnect);
   connectToWifi();
-  BMETimerID = timer.setInterval(interval, []() {
-    readBME();
-    publishMqtt(pubTopics, values, sizeof(pubTopics)/sizeof(pubTopics[0]));    
-  });
+  BMETimerID = timer.setInterval(bmeInterval, publishBME);
 }
 
-void loop() {
-  timer.run();
-}
+void loop() { timer.run(); }

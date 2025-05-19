@@ -10,21 +10,22 @@
 // BME280 object
 Adafruit_BME280 bme;
 // Array with global variables to hold sensor readings
-float values[3];
+int16_t bmeValues[3];
 
 //======================================
 // FUNCTIONS
 //======================================
-void initBME() {      // Initialize BME280
+void initBME() {      
   if (!bme.begin(0x76)) {
-    Serial.println(F("Could not find BME280 sensor, check wiring!"));
+    Serial.println(F("BME not found, check wiring!"));
     while (1);
   }
+  if (Debug) Serial.println(F("BME init OK"));
 }
 
 void readBME() {      // Read data from BME280
-    values[0]= bme.readTemperature();
-    values[1]= bme.readHumidity();
-    values[2]= bme.readPressure()/100.0F;
-    if (espDebug) Serial.println(values[0] + values[1] + values[2]);
+  if (Debug) Serial.println(F("Reading BME"));
+  bmeValues[0] = round(bme.readTemperature() * 10);
+  bmeValues[1] = round(bme.readHumidity() * 10);
+  bmeValues[2] = round(bme.readPressure() / 10);
 }

@@ -1,0 +1,837 @@
+[
+    {
+        "id": "c898a3436e74b371",
+        "type": "group",
+        "z": "4626f4eca8ae462b",
+        "name": "Console (Thermostat & GPIO's)",
+        "style": {
+            "label": true,
+            "color": "#a4a4a4",
+            "fill": "#000000",
+            "stroke": "#7f7f7f"
+        },
+        "nodes": [
+            "160c08b2a9eeceb3",
+            "f7925e8afb7deef1",
+            "c3423e9ddf350143",
+            "ee1d40b0bf9738b5",
+            "a98d460feca2ceed",
+            "08e0eb751e12071f",
+            "b8214434b1714757",
+            "21ed23739f57aac4",
+            "ee294803aa6fe596",
+            "5d65f2f5f5c08492",
+            "9216bc7606f92cbb",
+            "2680057682d1b6bb",
+            "a7f0c637a1219828",
+            "c3237960e6d73cdf",
+            "e135582e7a34ec35",
+            "9d399640d87aea8b",
+            "5d8554c481872c35",
+            "4a34ba5d4279fb63",
+            "f1c50173137936a0",
+            "0ea14112748120a3",
+            "d0408e5e53f0b180",
+            "13aa9cc4068b6485",
+            "f1e7f79d9bb21d78",
+            "a22f0ecda7399c7b",
+            "3b1d601d5a53c5b5",
+            "99f0a008fdc29b45"
+        ],
+        "x": 994,
+        "y": 779,
+        "w": 932,
+        "h": 642
+    },
+    {
+        "id": "160c08b2a9eeceb3",
+        "type": "websocket out",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "/ws  --> BME",
+        "server": "8dbef215b4efa8a7",
+        "client": "",
+        "x": 1830,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "f7925e8afb7deef1",
+        "type": "ui-switch",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "debug",
+        "label": "Debug",
+        "group": "ccd177e6e1aae92d",
+        "order": 4,
+        "width": 2,
+        "height": 0,
+        "passthru": true,
+        "decouple": false,
+        "topic": "debug",
+        "topicType": "str",
+        "style": "",
+        "className": "",
+        "layout": "row-left",
+        "clickableArea": "switch",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 1370,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c3423e9ddf350143",
+        "type": "ui-button",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "group": "ccd177e6e1aae92d",
+        "name": "reboot",
+        "label": "Reboot ESP",
+        "order": 6,
+        "width": 2,
+        "height": 0,
+        "emulateClick": true,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "",
+        "payloadType": "num",
+        "topic": "reboot",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 1370,
+        "y": 1240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ee1d40b0bf9738b5",
+        "type": "ui-slider",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "group": "2bee51758a9ad534",
+        "name": "Thermostat Control",
+        "label": "Thermostat: ",
+        "tooltip": "",
+        "order": 5,
+        "width": 5,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "thermostat",
+        "topicType": "str",
+        "thumbLabel": "true",
+        "showTicks": "true",
+        "min": "35",
+        "max": "5",
+        "step": "0.5",
+        "className": "",
+        "iconPrepend": "minus",
+        "iconAppend": "plus",
+        "color": "",
+        "colorTrack": "",
+        "colorThumb": "",
+        "showTextField": true,
+        "x": 1330,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a98d460feca2ceed",
+        "type": "comment",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "Description",
+        "info": "1. ### Process user inputs\n    -  Thermostat deadband --> create flow variable\n    -  Thermostat control --> evaluate heater required\n    -  GPIO controls --> 0 / 1\n2. ### Clean message (topic & msg only)\n3. ### Send message to ESP via websocket\n4. ### Show IP addresses\n    - Get IP address from ESP (ws client)\n    - Node-red IP address (ws server)",
+        "x": 1080,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "08e0eb751e12071f",
+        "type": "function",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "Clean object",
+        "func": "// led signal is reversed in ESP8266 (HIGH = LED OFF).\n// Any other output keeps consistent payload (HIGH = 1).\nif (msg.topic == \"led\") {\n    msg.payload = msg.payload == true? 0 \n        : msg.payload == false? 1 \n        : msg.payload;\n}\nelse {\n    msg.payload = msg.payload == true ? 1 \n        : msg.payload == false ? 0 \n        : msg.payload;\n}\n\n// Clean msg with only payload and topic\nreturn { payload: msg.payload, topic: msg.topic }",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1650,
+        "y": 1080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b8214434b1714757",
+        "type": "function",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "Process heater",
+        "func": "// The msg received can be ot the types:\n//  {\"payload\": 20, \"topic\": \"thermostat\"}\n//  {\"payload\": 0.3, \"topic\": \"deadband\"}\n//  {\"payload\": 21.4, \"topic\": \"temp\"}\n// The topic is the name of the flow-scoped variable.\n// The payload is the new value for that variable\n\n// Update the received variable (\"deadband\" / \"temp\" / \"thermostat\") in the context scope: :\ncontext.set(msg.topic, msg.payload);\n\n// Calculate the heater output and assign it to msg.payload\nconst T = context.get(\"temp\"),\n    DB = context.get(\"deadband\"),\n    Setpoint = context.get(\"thermostat\"),\n    Heater = Setpoint > T + DB ? 1 : 0;\n\n// No output if heater\" condition does not change.\nif (context.get(\"heater\") == Heater) { return };\n\n// If \"heater\" state changes update context and msg; \n// Send msg with topic=\"heater\" and correspondign payload.\ncontext.set(\"heater\", Heater);\nreturn { payload: Heater, topic: \"heater\"}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1640,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "21ed23739f57aac4",
+        "type": "ui-number-input",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "group": "2bee51758a9ad534",
+        "name": "Temp. Deadband",
+        "label": "Temp. Deadband",
+        "order": 3,
+        "width": 2,
+        "height": 0,
+        "topic": "deadband",
+        "topicType": "str",
+        "min": "0.1",
+        "max": "1",
+        "step": "0.1",
+        "tooltip": "Temp. Deadband",
+        "passthru": true,
+        "sendOnBlur": false,
+        "sendOnEnter": true,
+        "className": "",
+        "clearable": true,
+        "icon": "",
+        "iconPosition": "left",
+        "iconInnerPosition": "inside",
+        "spinner": "stacked",
+        "x": 1330,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ee294803aa6fe596",
+        "type": "inject",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "Init Deadband",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "0.2",
+        "payloadType": "num",
+        "x": 1140,
+        "y": 880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5d65f2f5f5c08492",
+        "type": "inject",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "Init Thermostat",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "5",
+        "payloadType": "num",
+        "x": 1140,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9216bc7606f92cbb",
+        "type": "ui-switch",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "boiler",
+        "label": "Boiler",
+        "group": "2bee51758a9ad534",
+        "order": 4,
+        "width": 1,
+        "height": 0,
+        "passthru": true,
+        "decouple": false,
+        "topic": "boiler",
+        "topicType": "str",
+        "style": "",
+        "className": "",
+        "layout": "row-left",
+        "clickableArea": "switch",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "",
+        "offcolor": "",
+        "x": 1370,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2680057682d1b6bb",
+        "type": "inject",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "Init. Boiler",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 1130,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a7f0c637a1219828",
+        "type": "ui-switch",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "led",
+        "label": "Led",
+        "group": "ccd177e6e1aae92d",
+        "order": 5,
+        "width": 2,
+        "height": 0,
+        "passthru": true,
+        "decouple": false,
+        "topic": "led",
+        "topicType": "str",
+        "style": "",
+        "className": "",
+        "layout": "row-left",
+        "clickableArea": "switch",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 1370,
+        "y": 1180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c3237960e6d73cdf",
+        "type": "inject",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "Init. Debug",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 1130,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e135582e7a34ec35",
+        "type": "inject",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "Init. LED",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 1120,
+        "y": 1180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9d399640d87aea8b",
+        "type": "debug",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "/ws out",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1820,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "5d8554c481872c35",
+        "type": "link in",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "heater link in",
+        "links": [
+            "66ebbe5592fcbb3c"
+        ],
+        "x": 1515,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4a34ba5d4279fb63",
+        "type": "inject",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "Trigger on start",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 1,
+        "topic": "",
+        "x": 1140,
+        "y": 1380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f1c50173137936a0",
+        "type": "function",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "Get Local IP",
+        "func": "// Get all the network interfaces on the system:\nconst interfaces = os.networkInterfaces();\nlet localIP = '';\n\nconst preferredInterfaces = ['Wi-Fi', 'wlan0', 'eth0', 'Ethernet'];\n\nfor (const name of preferredInterfaces.concat(Object.keys(interfaces))) {\n    const ifaceList = interfaces[name];\n    if (!ifaceList) continue;\n    \n    for (const iface of ifaceList) {\n        if (iface.family === 'IPv4' && !iface.internal) {\n            localIP = iface.address;\n            break;\n        }\n    }\n    if (localIP) break;\n}\n\nmsg.topic = \"localIP\";\nmsg.payload = localIP || \"Not found\";\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "os",
+                "module": "os"
+            }
+        ],
+        "x": 1390,
+        "y": 1380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0ea14112748120a3",
+        "type": "ui-text",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "group": "6eb4c34296451018",
+        "order": 2,
+        "width": 4,
+        "height": 0,
+        "name": "Host IP",
+        "label": "Node Red (host) IP:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 1640,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "d0408e5e53f0b180",
+        "type": "ui-button",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "group": "ccd177e6e1aae92d",
+        "name": "get ESP IP",
+        "label": "get ESP IP",
+        "order": 3,
+        "width": 2,
+        "height": 0,
+        "emulateClick": true,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "",
+        "payloadType": "num",
+        "topic": "espIP",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 1390,
+        "y": 1280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "13aa9cc4068b6485",
+        "type": "link in",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "interval link in",
+        "links": [
+            "75337e4a4e24b089"
+        ],
+        "x": 1405,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f1e7f79d9bb21d78",
+        "type": "ui-text",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "group": "2bee51758a9ad534",
+        "order": 2,
+        "width": 2,
+        "height": 0,
+        "name": "Temperature",
+        "label": "Temperature: ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 1630,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "a22f0ecda7399c7b",
+        "type": "link in",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "name": "read link in",
+        "links": [
+            "2fbb9bfb1ce03965"
+        ],
+        "x": 1275,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3b1d601d5a53c5b5",
+        "type": "ui-button",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "group": "6eb4c34296451018",
+        "name": "Reset Network",
+        "label": "Reset Network",
+        "order": 3,
+        "width": 2,
+        "height": 0,
+        "emulateClick": true,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "",
+        "payloadType": "num",
+        "topic": "wifi",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 1400,
+        "y": 1320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "99f0a008fdc29b45",
+        "type": "ui-button",
+        "z": "4626f4eca8ae462b",
+        "g": "c898a3436e74b371",
+        "group": "ccd177e6e1aae92d",
+        "name": "read",
+        "label": "Trigger",
+        "order": 2,
+        "width": 2,
+        "height": 0,
+        "emulateClick": true,
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "iconPosition": "left",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "read",
+        "topicType": "str",
+        "buttonColor": "",
+        "textColor": "",
+        "iconColor": "",
+        "enableClick": true,
+        "enablePointerdown": false,
+        "pointerdownPayload": "",
+        "pointerdownPayloadType": "str",
+        "enablePointerup": false,
+        "pointerupPayload": "",
+        "pointerupPayloadType": "str",
+        "x": 1370,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8dbef215b4efa8a7",
+        "type": "websocket-listener",
+        "path": "/ws",
+        "wholemsg": "true"
+    },
+    {
+        "id": "ccd177e6e1aae92d",
+        "type": "ui-group",
+        "name": "ESP",
+        "page": "bde350f197f7a982",
+        "width": 2,
+        "height": 1,
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "2bee51758a9ad534",
+        "type": "ui-group",
+        "name": "Thermostat",
+        "page": "bde350f197f7a982",
+        "width": 6,
+        "height": 1,
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "6eb4c34296451018",
+        "type": "ui-group",
+        "name": "Connections",
+        "page": "bde350f197f7a982",
+        "width": 6,
+        "height": 1,
+        "order": 4,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false",
+        "groupType": "default"
+    },
+    {
+        "id": "bde350f197f7a982",
+        "type": "ui-page",
+        "name": "WS Console",
+        "ui": "77e83d514b9bd6e2",
+        "path": "/WS_console",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "f633910aef2e9d8b",
+        "breakpoints": [
+            {
+                "name": "Default",
+                "px": "0",
+                "cols": "3"
+            },
+            {
+                "name": "Tablet",
+                "px": "576",
+                "cols": "6"
+            },
+            {
+                "name": "Small Desktop",
+                "px": "768",
+                "cols": "9"
+            },
+            {
+                "name": "Desktop",
+                "px": "1024",
+                "cols": "12"
+            }
+        ],
+        "order": 4,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "77e83d514b9bd6e2",
+        "type": "ui-base",
+        "name": "NoderedUI",
+        "path": "/dashboard",
+        "appIcon": "",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": true,
+        "headerContent": "page",
+        "navigationStyle": "default",
+        "titleBarStyle": "default",
+        "showReconnectNotification": true,
+        "notificationDisplayTime": 1,
+        "showDisconnectNotification": true
+    },
+    {
+        "id": "f633910aef2e9d8b",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#282828",
+            "primary": "#0a5a78",
+            "bgPage": "#000000",
+            "groupBg": "#afafaf",
+            "groupOutline": "#0d0d0d"
+        },
+        "sizes": {
+            "density": "default",
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    }
+]
