@@ -7,10 +7,13 @@
 //======================================
 // VARIABLES
 //======================================
-// BME280 object
-Adafruit_BME280 bme;
-// Array with global variables to hold sensor readings
-int16_t bmeValues[3];
+Adafruit_BME280 bme;    // BME280 object
+int16_t bmeValues[3];   // Array with global variables to hold sensor readings
+uint16_t BMETimerID;    // Timer ID for BME periodical readings
+unsigned long bmeInterval = 30000;   // BME interval 
+// Array with BME topics 
+const char* bmeKeys[] = { "temp", "hum", "pres" };
+const byte numBmeKeys = sizeof(bmeKeys) / sizeof(bmeKeys[0]);
 
 //======================================
 // FUNCTIONS

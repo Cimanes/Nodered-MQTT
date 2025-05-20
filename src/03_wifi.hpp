@@ -21,8 +21,9 @@
 AsyncWebServer server(80)               ;   // Required for HTTP 
 WiFiEventHandler wifiConnectHandler     ;   // Event handler for wifi connection
 WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnection
+#define WIFI_MANAGER 
 
-#if defined(wifiManager)
+#if defined(WIFI_MANAGER)
   // =============================================
   // Wifi Manager Variables: set SSID, Password and IP address
   // =============================================
@@ -55,14 +56,14 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
   // =============================================
   // Hardcoded Wifi Variables: Credentials. 
   // =============================================
-  #define Toledo      // OPTIONAL: Choose Wifi credentials [Cimanes, Toledo, apartment]
-  #if defined(Cimanes)
+  #define TOLEDO      // OPTIONAL: Choose Wifi credentials [CIMANES, TOLEDO, TRAVEL]
+  #if defined(CIMANES)
     const char ssid[] = "Pepe_Cimanes";
     const char pass[] = "Cimanes7581" ;
-  #elif defined(Toledo)
+  #elif defined(TOLEDO)
     const char ssid[] = "MIWIFI_HtR7" ;
     const char pass[] = "TdQTDf3H"    ;
-  #elif defined(apartment)
+  #elif defined(TRAVEL)
     const char ssid[] = "John-Rs-Foodhall_EXT" ;
     const char pass[] = "sive2017"    ;
   #endif
@@ -71,12 +72,10 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
   const IPAddress hostIP(192, 168, 1, 133);   // Had coded Node-red server IP    WiFi.mode(WIFI_STA);
 #endif
 
-#if defined (wifiManager)
+#if defined (WIFI_MANAGER)
 // =============================================
 // Wifi Manager Functions
 // =============================================
-
-
 
 // Get SSID, Password and IP address from LittleFS files
   void getWiFi() {
@@ -125,12 +124,14 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
 
 
   // Function to allow user to enter ssid and password
-  // @details This function is used to connect to an ESP Wi-Fi network with a given SSID and password. 
-  //          It also starts a web server to allow the user to input these values.
-  //          The values are stored in the LittleFS file system of the ESP. If the values are not defined, 
-  //          the ESP will start a Wi-Fi network with the name "ESP-WIFI-MANAGER" and no password.
-  //          The user can then connect to this network and open the web page at the IP address of the ESP (usually 192.168.4.1)
-  //          to input the values. The ESP will then reboot and connect to the Wi-Fi network with the given values.
+  // @details Connect to an ESP Wi-Fi network with a given SSID and password. 
+  //          Starts a web server to allow the user to input these values.
+  //          The values are stored in the LittleFS file system of the ESP. 
+  //          If the values are not defined, the ESP will start an open Wi-Fi network "ESP-WIFI-MANAGER".
+  //          The user can connect to this network and open the web page at the IP address of the ESP (usually 192.168.4.1).
+  //          In that page, the user can input the required fields for Wifi connection. 
+  //          The values are then stored in the LittleFS file system of the ESP.
+  //          The ESP will then reboot and connect to the Wi-Fi network with the given values.
   void defineWiFi() {
     Serial.println(F("Setting AP")); 
     // Remove the password parameter (=NULL), if you want the AP (Access Point) to be open 
@@ -229,8 +230,11 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
   }
 #endif
 
+//==================================================
+// Connect to WiFi (common function)
+//==================================================
 void connectToWifi() {
-  #if defined(wifiManager)  // Initialize Wifi, optional use wifiManager 
+  #if defined(WIFI_MANAGER)  // Initialize Wifi, optional use WIFI_MANAGER 
     getWiFi();              // Get SSID, Password and IP from files
     if(!initWiFi()) {       // If SSID or Password were not stored, manage them and reboot
       defineWiFi();

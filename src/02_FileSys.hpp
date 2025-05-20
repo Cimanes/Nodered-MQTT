@@ -41,6 +41,7 @@ void writeFile(fs::FS &fs, const char * path, const char * message){
   if (!file.print(message))  {
     if (Debug) Serial.println(F("Write - FAIL"));
   }
+  file.close();    // Not required in Arduino enviroment
 }
 
 // ===============================================================================
@@ -59,7 +60,7 @@ void fileToCharPtr(fs::FS &fs, const char* path, char* buffer) {
     buffer[i++] = (char)file.read();
   }
   buffer[i] = '\0';
-  file.close();
+  file.close();    // Not required in Arduino enviroment
 }
 
 // ===============================================================================
@@ -122,7 +123,7 @@ void deleteFile(fs::FS &fs, const char * path){
 //     return;
 //   }
 //   if (file.print(message) && file.print(",")) {
-//     if (Debug)  Serial.println(F("- msg. appended"));
+//     if (Debug)  Serial.println(F("- msgOut. appended"));
 //   }
 //   else { 
 //     if (Debug)  Serial.println(F("Append - FAIL")); 

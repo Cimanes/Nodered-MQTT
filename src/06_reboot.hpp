@@ -1,13 +1,10 @@
-// =============================================
-// VARIABLES 
-// =============================================
-unsigned int rebootTimer;
+
 
 // =============================================
 // Periodic function to check if a reboot is requested
 // =============================================
 void checkReboot() {
-  if(reboot) { 
+  if(reboot) {
     if (Debug) Serial.println(F("rebooting"));
     reboot = false;
   #if defined(ESP32)  
@@ -18,10 +15,12 @@ void checkReboot() {
   }
 }
 
-void initReboot() { // Request to delete data file
-  server.on("/reboot", HTTP_GET, [](AsyncWebServerRequest *request) {
-    reboot = true;
-    request->send(200);
-  });
-  rebootTimer = timer.setInterval(2000, checkReboot);
+
+void initReboot() {
+  rebootTimer = timer.setInterval(2000, checkReboot);  
+  // server.on("/reboot", HTTP_GET, [](AsyncWebServerRequest *request) {
+  //   reboot = true;
+  //   request->send(200);
+  // });
+  if (Debug)  { Serial.println(F("Reboot set")); }
 }

@@ -1,5 +1,6 @@
 {
   "files.associations": {
-    "ranges": "cpp"
+    "ranges": "cpp",
+    "system_error": "cpp"
   }
 }

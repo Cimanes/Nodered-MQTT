@@ -1,27 +1,18 @@
 //======================================
-// LIBRARIES
+// GLOBAL LIBRARIES
 //======================================
 #include <Arduino.h>
-#include <ESP8266WiFi.h>
 #include <SimpleTimer.h>
 
 //======================================
-// VARIABLES
+// GLOBAL VARIABLES
 //======================================
-// Define wifi credentials
-#define wifiManager
 boolean Debug = true;
 boolean reboot = false;
-
-#define HEATER_PIN 13             // Pin used for heater signal
-#define BOILER_PIN 15             // Pin used for boiler signal
-
-// Define WiFi event handlers and Ticker/SimpleTimer object to manage reconnection
-SimpleTimer timer;
-unsigned long BMETimerID;
-
-// Global variables to control timers
-unsigned long bmeInterval = 60000;   // Interval at which to read BME and publish values
+#define HEATER_PIN 13     // Pin used for heater signal
+#define BOILER_PIN 15     // Pin used for boiler signal
+SimpleTimer timer;        // SimpleTimer object
+unsigned int rebootTimer; // Timer for reboot
 
 // =====================================
 // Setup GPIO's

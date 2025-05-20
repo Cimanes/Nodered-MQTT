@@ -6,17 +6,19 @@
 //======================================
 // VARIABLES
 //======================================
-AsyncMqttClient mqttClient;         // MQTT Client
-unsigned long mqttReconnectTimerID; // Timer to reconnect to MQTT after failed
-
 #define MQTT_HOST hostIP          // MQTT BROKER IP ADDRESS (= Node red server IP)
 #define MQTT_PORT 1883            // MQTT BROKER PORT
 #define BROKER_USER "cimanes"     // MQTT BROKER USER
 #define BROKER_PASS "Naya-1006"   // MQTT BROKER PASSWORD
+#define PRINT_LEN 100               // Size limit for payload serial.print
 
-// Arrays of Pub and Sub Topics
-const char* bmeKeys[] = { "temp", "hum", "pres" };
-const byte numBmeKeys = sizeof(bmeKeys) / sizeof(bmeKeys[0]);
+AsyncMqttClient mqttClient;         // MQTT Client
+unsigned long mqttReconnectTimerID; // Timer to reconnect to MQTT after failed
+
+// Subscribe topic List: Following variables are defined inside function "onMqttConnect"
+// static const char* subTopics[] = { "gpio/#", "bme/interval", "bme/read", "esp/reboot", "esp/espIP", "esp/debug", "esp/wifi"  };
+// const byte subLen = sizeof(subTopics) / sizeof(subTopics[0]);
+
 
 //======================================
 // FUNCTIONS
@@ -32,33 +34,13 @@ void connectToMqtt() {
  * @param values Array of float values to publish.
  * @param numTopics Number of topics to publish to.
  */
-void publishArray_OLD(const char* topics[], int16_t values[], byte numTopics) {
-  if (Debug) Serial.println(F("Publishing..."));
-  static char payload[6];  // Static buffer to reduce stack usage
-
-  for (int i = 0; i < numTopics; i++) {
-    // snprintf(payload, sizeof(payload), "%d", values[i]);
-    itoa(values[i], payload, 10);
-    mqttClient.publish(topics[i], 1, true, payload);
-    if (Debug) { Serial.println(topics[i]); }
-  }
-}
 
 void publishArray(const char* topic, const char* keys[], int16_t values[], byte numKeys) {
   if (Debug) Serial.println(F("Publishing..."));
-  makeJsonArray(numKeys, keys, values);
-  mqttClient.publish(topic, 1, true, msg);
-  if (Debug) { Serial.println(msg); }
+  const char* payload = makeJsonArray(numKeys, keys, values);           // -> create jsonBuffer
+  mqttClient.publish(topic, 1, true, payload);
+  if (Debug) { Serial.println(payload); }
 }
-
-
-
-
-
-
-
-
-
 
 void publishInt(const char* topic, uint16_t value) {
   static char payload[6];  // Static buffer to reduce stack usage
@@ -90,7 +72,7 @@ void publishBME() {
 void onMqttConnect(bool sessionPresent) {
   if(Debug) { Serial.println(F("Subscribing:")); }
   
-  static const char* subTopics[] = { "esp/debug", "gpio/#", "bme/interval", "bme/read" };
+  static const char* subTopics[] = { "gpio/#", "bme/interval", "bme/read", "esp/reboot", "esp/espIP", "esp/debug", "esp/wifi"  };
   static const byte subLen = sizeof(subTopics) / sizeof(subTopics[0]);
 
   for (byte i = 0; i < subLen; i++) {
@@ -130,8 +112,13 @@ void onmqttUnsubscribe(uint16_t packetId) {
 
 void onmqttMessage(const char* topic, const char* payload, const AsyncMqttClientMessageProperties properties, size_t len, size_t index, size_t total) {
   if (Debug) {
+    static const byte printLen = min(len, size_t(PRINT_LEN));
+    char payloadPrint[printLen + 1];
+    memcpy(payloadPrint, payload, len);
+    payloadPrint[printLen] = '\0';      // Ensure it's a valid C-string
+ 
     Serial.print(F("Received "));
-    Serial.printf("topic: %s, payload: %s\n", topic, payload);
+    Serial.printf("topic: %s, payload: %s\n", topic, payloadPrint);
     // More properties available:
     // Serial.printf("Pub received. \n topic: %s, qos: %i, dup: %i, retain: %i, len: %i, index: %i, total: %i \n", topic, properties.qos, properties.dup, properties.retain, len, index, total);
   }
@@ -142,6 +129,7 @@ void onmqttMessage(const char* topic, const char* payload, const AsyncMqttClient
     int gpio = atoi(gpioStr);
     bool out = !strncmp(payload, "1", len);
     digitalWrite(gpio, out);
+    mqttClient.publish("fb/gpio", 1, true, out ? "1" : "0");
     return;
   }
 
@@ -161,6 +149,7 @@ void onmqttMessage(const char* topic, const char* payload, const AsyncMqttClient
   // Change debug level
   else if (strstr(topic, "debug")) {
     Debug = (!strncmp(payload, "1", len));  // set Debug per payload
+    mqttClient.publish("fb/debug", 1, true, Debug ? "1" : "0");
     if (Debug) {
       Serial.print(F("Debug: "));
       Serial.println(Debug);
@@ -170,12 +159,82 @@ void onmqttMessage(const char* topic, const char* payload, const AsyncMqttClient
 
   // Trigger BME reading
   else if (strstr(topic, "read")) {
-    // if (Debug) { Serial.println(F("Read BME")); }
-    // timer.deleteTimer(BMETimerID);
+    if (Debug) { Serial.println(F("Read BME")); }
+    timer.deleteTimer(BMETimerID);
     publishBME();
-    // BMETimerID = timer.setInterval(bmeInterval, publishBME);
+    BMETimerID = timer.setInterval(bmeInterval, publishBME);
+  }
+
+  // Publish ESP IP
+  else if (strstr(topic, "espIP")) {
+    if (Debug) { Serial.println(F("Pub. ESP IP")); }
+    mqttClient.publish("fb/espIP", 1, true, esp_ip);
+  }
+
+  // Re-define wifi credentials
+  else if (strstr(topic, "wifi")) {
+    deleteFile(LittleFS, ssidPath);
+    deleteFile(LittleFS, passPath);
+    deleteFile(LittleFS, ipPath);
+    deleteFile(LittleFS, routerPath);
+    deleteFile(LittleFS, hostPath);
+    mqttClient.publish("fb/wifi", 1, true, "wifi clear");
+  }
+
+  // Reboot the ESP
+  else if (strstr(topic, "reboot")) {
+    if (Debug) { Serial.print(F("Rebooting")); }    
+    reboot = true;
   }
 }
+
+
+
+
+
+
+// struct Handler {            // Handler structure to manage handlers
+//   const char* topic;
+//   void (*handler)(StaticJsonDocument<100>&);
+// };
+
+// const Handler handlers[] = {
+//   { "heater", handleHeater },
+//   { "boiler", handleBoiler },
+//   { "debug", handleDebug },
+//   { "led", handleLED },
+//   { "interval", handleInterval },
+//   { "espIP", handleIP},
+//   { "read", handleRead },
+//   #ifdef WIFI_MANAGER
+//   { "wifi", handleWifi },
+//   #endif
+//   { "reboot", handleReboot }
+// };
+// const byte handlerCount = sizeof(handlers) / sizeof(handlers[0]);
+
+// void processMessage(uint8_t* wsMessage) {
+//   // check for error
+//   if (deserializeJson(jsonDoc, wsMessage)) {
+//     if (Debug) Serial.println(F("Invalid JSON"));
+//     return;
+//   }
+//   const char* topic = jsonDoc["topic"];
+//   if (!topic) return;
+//   for (byte i = 0; i < handlerCount; i++) {
+//     if (strcmp(topic, handlers[i].topic) == 0) {
+//       handlers[i].handler(jsonDoc);
+//       return;
+//     }
+//   }
+// }
+
+
+
+
+
+
+
 
 void onmqttPublish(uint16_t packetId) {
   if (Debug) {
