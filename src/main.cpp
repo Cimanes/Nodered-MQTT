@@ -1,37 +1,27 @@
 #include "00_globals.hpp"
-#include "01_json.hpp"
-#include "02_fileSys.hpp"
-#include "03_wifi.hpp"
-#include "04_bme.hpp"
-#include "05_mqtt.hpp"
-#include "06_reboot.hpp"
-
-//=======================================
-// GLOBAL FUNCTIONS
-//=======================================
-void onwifiConnect(const WiFiEventStationModeGotIP& event) {
-  initMqtt();
-  connectToMqtt();
-}
-
-void onwifiDisconnect(const WiFiEventStationModeDisconnected& event) {
-  if (Debug)   Serial.println(F("Wifi disconnected."));
-  timer.deleteTimer(mqttReconnectTimerID);  // ensure we don't reconnect to MQTT while reconnecting to Wi-Fi
-  timer.setTimeout(2000, connectToWifi); // attempt to reconnect to WiFi
-}
+#include "01_reboot.hpp"
+#include "02_json.hpp"
+#include "03_fileSys.hpp"
+#include "04_wifi.hpp"
+#include "05_bme.hpp"
+#include "06_mqtt.hpp"
+#include "07_events.hpp"
 
 
 void setup() {
   Serial.begin(115200);
-  initReboot();   // Initialize Reboot
   initFS();       // Initialize File System
   initGPIO();     // Initialize GPIO  
-  initBME();
+  initBME();      // Connect to BME
+
   // Initialize wifi and MQTT
   wifiDisconnectHandler = WiFi.onStationModeDisconnected(onwifiDisconnect);
   wifiConnectHandler = WiFi.onStationModeGotIP(onwifiConnect);
   connectToWifi();
+
+  // Set timers for BME-read and Reboot-check
   BMETimerID = timer.setInterval(bmeInterval, publishBME);
+  initReboot();
 }
 
 void loop() { timer.run(); }

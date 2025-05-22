@@ -7,6 +7,7 @@
 // VARIABLES    
 //======================================================
 StaticJsonDocument<100> jsonDoc;  // Dummy JSON document
+static char jsonBuffer[100];      // Dummy char array to be sent via MQTT
 
 //======================================================
 // FUNCTIONS    
@@ -19,15 +20,12 @@ StaticJsonDocument<100> jsonDoc;  // Dummy JSON document
  * @param keys Array of keys (strings).
  * @param values Array of values (integers) corresponding to the keys.
  */
-const char* makeJsonArray(const byte numKeys, const char* keys[], int16_t values[]) {
-  static char jsonBuffer[100];             // Dummy char array
+void makeJsonArray(const byte numKeys, const char* keys[], int16_t values[]) {
   jsonDoc.clear();  // Clear the document to avoid leftover data
   for (byte i = 0; i < numKeys; i++)  { jsonDoc[keys[i]] = values[i]; }
   serializeJson(jsonDoc, jsonBuffer, sizeof(jsonBuffer)); // Convert jsonDoc to char array
   // if (Debug) Serial.println(jsonBuffer);               // Optional debug output
-  return jsonBuffer;
 }
-
 
 // ============================= Not used in this project
 // void makeJsonInt(const char* key, uint16_t value) {
@@ -40,15 +38,14 @@ const char* makeJsonArray(const byte numKeys, const char* keys[], int16_t values
 // }
 
 // ============================= Not used in this project
-void makeJsonString(const char* key, const char* value) {
-  static char jsonBuffer[100];             // Dummy char array
-  jsonDoc.clear();  // Clear the document to avoid leftover data
+// void makeJsonString(const char* key, const char* value) {
+//   jsonDoc.clear();  // Clear the document to avoid leftover data
 
-  // Add key-value pair to the JSON object "jsonDoc"
-  jsonDoc["topic"] = key;
-  jsonDoc["payload"] = value;
+//   // Add key-value pair to the JSON object "jsonDoc"
+//   jsonDoc["topic"] = key;
+//   jsonDoc["payload"] = value;
 
-  serializeJson(jsonDoc, jsonBuffer, sizeof(jsonBuffer)); // Convert jsonDoc to char array
-  if (Debug) Serial.println(jsonBuffer);             // Optional debug output
-}
+//   serializeJson(jsonDoc, jsonBuffer, sizeof(jsonBuffer)); // Convert jsonDoc to char array
+//   // if (Debug) Serial.println(jsonBuffer);             // Optional debug output
+// }
 

@@ -18,12 +18,12 @@ const byte numBmeKeys = sizeof(bmeKeys) / sizeof(bmeKeys[0]);
 //======================================
 // FUNCTIONS
 //======================================
-void initBME() {      
+void initBME() {      // Connect to sensor
   if (!bme.begin(0x76)) {
     Serial.println(F("BME not found, check wiring!"));
     while (1);
   }
-  if (Debug) Serial.println(F("BME init OK"));
+  if (Debug) Serial.println(F("BME found"));
 }
 
 void readBME() {      // Read data from BME280

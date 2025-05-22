@@ -155,40 +155,38 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
           if (p->name() == PARAM_INPUT_1) {
             strncpy(ssid, p->value().c_str(), paramSize - 1);
             ssid[paramSize - 1] = '\0'; // Ensure null-termination
-            Serial.print(F("SSID: "));  Serial.println(ssid);
+            Serial.printf_P(PSTR("SSID: %s\n"), ssid);
             writeFile(LittleFS, ssidPath, ssid);
           }
           // HTTP POST pass value
           else if (p->name() == PARAM_INPUT_2) {
             strncpy(pass, p->value().c_str(), paramSize - 1);
             pass[paramSize - 1] = '\0'; // Ensure null-termination
-            Serial.print(F("Password: "));  Serial.println(pass);
+            Serial.printf_P(PSTR("Password: %s\n"), pass);
             writeFile(LittleFS, passPath, pass);
           }
           // HTTP POST esp_ip value
           else if (p->name() == PARAM_INPUT_3) {
             strncpy(esp_ip, p->value().c_str(), paramSize - 1);
             esp_ip[paramSize - 1] = '\0'; // Ensure null-termination
-            Serial.print(F("Local IP: "));  Serial.println(esp_ip);
+            Serial.printf_P(PSTR("ESP IP: %s\n"), esp_ip);
             writeFile(LittleFS, ipPath, esp_ip);
           }
           // HTTP POST router IP value
           else if (p->name() == PARAM_INPUT_4) {
             strncpy(router, p->value().c_str(), paramSize - 1);
             router[paramSize - 1] = '\0'; // Ensure null-termination
-            Serial.print(F("Router IP: "));
-            Serial.println(router);
+            Serial.printf_P(PSTR("Router IP: %s\n"), router);
             writeFile(LittleFS, routerPath, router);
           }
           // HTTP POST node-red host IP value
           else if (p->name() == PARAM_INPUT_5) {
             strncpy(host, p->value().c_str(), paramSize - 1);
             host[paramSize - 1] = '\0'; // Ensure null-termination
-            Serial.print(F("Host IP: "));
-            Serial.println(host);
+            Serial.printf_P(PSTR("Host IP: %s\n"), host);
             writeFile(LittleFS, hostPath, host);
           }           
-          if (Debug) Serial.printf("POST[%s]: %s\n", p->name().c_str(), p->value().c_str()); 
+          if (Debug) Serial.printf_P(PSTR("POST[%s]: %s\n"), p->name().c_str(), p->value().c_str()); 
         }
       }
       request->send(200, "text/plain", "Done. ESP rebooting, connect to your router. ESP IP address: " + String(esp_ip));

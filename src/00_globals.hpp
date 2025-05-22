@@ -7,21 +7,24 @@
 //======================================
 // GLOBAL VARIABLES
 //======================================
-boolean Debug = true;
-boolean reboot = false;
-#define HEATER_PIN 13     // Pin used for heater signal
-#define BOILER_PIN 15     // Pin used for boiler signal
 SimpleTimer timer;        // SimpleTimer object
-unsigned int rebootTimer; // Timer for reboot
+boolean Debug = true;
+
+// struct to assign GPIO pins for each topic
+struct pinMap { const char* topic; const byte gpio; const bool value; }; 
+const pinMap gpioPins[] = {       
+  { "led", LED_BUILTIN, true },
+  { "heater", 13 , false}, 
+  { "boiler", 15, false }
+};
+const byte gpioCount = sizeof(gpioPins) / sizeof(gpioPins[0]);
 
 // =====================================
 // Setup GPIO's
-//======================================
+// //======================================
 void initGPIO() {
-  pinMode(HEATER_PIN, OUTPUT);
-  pinMode(BOILER_PIN, OUTPUT);
-  pinMode (LED_BUILTIN, OUTPUT);
-  digitalWrite(HEATER_PIN, LOW); 
-  digitalWrite(BOILER_PIN, LOW);
-  digitalWrite(LED_BUILTIN, HIGH);
+  for (byte i = 0; i < gpioCount; i++) {
+    pinMode(gpioPins[i].gpio, OUTPUT);
+    digitalWrite(gpioPins[i].gpio, gpioPins[i].value);
+  }
 }
