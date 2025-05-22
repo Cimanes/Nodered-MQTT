@@ -84,9 +84,9 @@ void handleInterval(const char* topic, const char* payload) {
   publishBME();
   BMETimerID = timer.setInterval(bmeInterval, publishBME);
 
-  static char intervalStr[12];          // Enough for unsigned long (max 10 digits + null)
-  ultoa(bmeInterval, intervalStr, 10);  // Convert to base-10 string
-  mqttClient.publish("fb/interval", 1, true, payload);
+  static char intervalStr[12];                // Enough for unsigned long (max 10 digits + null)
+  ultoa(bmeInterval/1000 , intervalStr, 10);  // Convert to base-10 string
+  mqttClient.publish("fb/interval", 1, true, intervalStr);
   if (Debug) Serial.printf_P(PSTR("Interval: %d\n"), bmeInterval);
 }
 
