@@ -7,7 +7,6 @@
 #include "06_mqtt.hpp"
 #include "07_events.hpp"
 
-
 void setup() {
   Serial.begin(115200);
   initFS();       // Initialize File System
@@ -20,8 +19,8 @@ void setup() {
   connectToWifi();
 
   // Set timers for BME-read and Reboot-check
-  BMETimerID = timer.setInterval(bmeInterval, publishBME);
   initReboot();
+  bmeTimerID = timer.setInterval(bmeInterval, publishBME);
 }
 
 void loop() { timer.run(); }

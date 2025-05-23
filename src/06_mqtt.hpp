@@ -13,7 +13,6 @@
 #define PRINT_LEN 100             // Size limit for payload serial.print
 
 AsyncMqttClient mqttClient;         // MQTT Client
-unsigned long mqttReconnectTimerID; // Timer to reconnect to MQTT after failed
 // const char* subTopics[] = { "gpio/#", "bme/interval", "bme/read", "esp/reboot", "esp/espIP", "esp/debug", "esp/wifi"  };
 const char* subTopics[] = { "gpio/#", "bme/#", "esp/#" };
 const byte subLen = sizeof(subTopics) / sizeof(subTopics[0]);
@@ -79,10 +78,10 @@ void handleDebug(const char* topic, const char* payload) {
 
 void handleInterval(const char* topic, const char* payload) {
   if (Debug) Serial.printf_P(PSTR("BME interval: %d\n"), bmeInterval);
-  timer.deleteTimer(BMETimerID);
+  timer.deleteTimer(bmeTimerID);
   bmeInterval = strtoul(payload, NULL, 10) * 1000;
   publishBME();
-  BMETimerID = timer.setInterval(bmeInterval, publishBME);
+  bmeTimerID = timer.setInterval(bmeInterval, publishBME);
 
   static char intervalStr[12];                // Enough for unsigned long (max 10 digits + null)
   ultoa(bmeInterval/1000 , intervalStr, 10);  // Convert to base-10 string
@@ -91,9 +90,9 @@ void handleInterval(const char* topic, const char* payload) {
 }
 
 void handleRead(const char* topic, const char* payload) {
-  timer.deleteTimer(BMETimerID);
+  timer.deleteTimer(bmeTimerID);
   publishBME();
-  BMETimerID = timer.setInterval(bmeInterval, publishBME);
+  bmeTimerID = timer.setInterval(bmeInterval, publishBME);
 }
 
 void handleIP(const char* topic, const char* payload) {

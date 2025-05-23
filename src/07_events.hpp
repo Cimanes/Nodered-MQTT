@@ -17,6 +17,7 @@ const Handler handlers[] = {
   #endif
 };
 const byte handlerCount = sizeof(handlers) / sizeof(handlers[0]);
+unsigned long mqttReconnectTimerID; // Timer to reconnect to MQTT after failed
 
 //======================================================
 // MQTT EVENT FUNCTIONS
@@ -24,10 +25,10 @@ const byte handlerCount = sizeof(handlers) / sizeof(handlers[0]);
 
 // Subscribe once MQTT is connected
 void onMqttConnect(bool sessionPresent) {
-  if(Debug) { Serial.println(F("Subscribing:")); }
+  if(Debug) Serial.println(F("Subscribing:"));
   for (byte i = 0; i < subLen; i++) {
     mqttClient.subscribe(subTopics[i], 2);
-    if(Debug) { Serial.println(subTopics[i]); }
+    if(Debug) Serial.println(subTopics[i]);
   }
 }
 
@@ -41,18 +42,15 @@ void onmqttDisconnect(AsyncMqttClientDisconnectReason reason) {
 }
 
 void onmqttSubscribe(uint16_t packetId, uint8_t qos) {
-  if (Debug) { Serial.println(F("Sub. acknowledged")); }
+  if (Debug) Serial.println(F("Sub. acknowledged"));
 }
 
 void onmqttUnsubscribe(uint16_t packetId) {
-  if (Debug) { Serial.println(F("Unsub. acknowledged")); }
+  if (Debug) Serial.println(F("Unsub. acknowledged"));
 }
 
 void onmqttPublish(uint16_t packetId) {
-  if (Debug) {
-    Serial.print(F("Pub OK. #"));
-    Serial.println(packetId);
-  }
+  if (Debug) Serial.printf_P(PSTR("Pub OK. #%u \n"), packetId);
 }
 
 void onmqttMessage(const char* topic, const char* payload, const AsyncMqttClientMessageProperties properties, size_t len, size_t index, size_t total) {
@@ -100,6 +98,6 @@ void onwifiConnect(const WiFiEventStationModeGotIP& event) {
 
 void onwifiDisconnect(const WiFiEventStationModeDisconnected& event) {
   if (Debug)   Serial.println(F("Wifi disconnected."));
-  timer.deleteTimer(mqttReconnectTimerID);  // ensure we don't reconnect to MQTT while reconnecting to Wi-Fi
-  timer.setTimeout(2000, connectToWifi); // attempt to reconnect to WiFi
+  timer.deleteTimer(mqttReconnectTimerID);  // avoid reconnect to MQTT while reconnecting to Wi-Fi
+  timer.setTimeout(2000, connectToWifi);    // attempt to reconnect to WiFi
 }

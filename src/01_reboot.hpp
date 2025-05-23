@@ -2,7 +2,7 @@
 // VARIABLES
 //==============================================
 boolean reboot = false;
-unsigned int rebootTimer; // Timer for reboot
+unsigned int rebootTimerID; // Timer for reboot
 
 //==============================================
 // FUNCTIONS
@@ -16,14 +16,14 @@ void checkReboot() {
   #if defined(ESP32)  
     timer.setTimeout(5000, []() { esp_restart(); } );
   #elif defined(ESP8266)
-    timer.setTimeout(4000, []() { ESP.restart(); } );
+    timer.setTimeout(5000, []() { ESP.restart(); } );
   #endif
   }
 }
 
 // Setup timer for reboot check and server response when reboot is requested (optional)
 void initReboot() {
-  rebootTimer = timer.setInterval(4000, checkReboot);  
+  rebootTimerID = timer.setInterval(4000, checkReboot);  
   // server.on("/reboot", HTTP_GET, [](AsyncWebServerRequest *request) {
   //   reboot = true;
   //   request->send(200);

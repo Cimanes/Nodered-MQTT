@@ -134,7 +134,7 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
   //          The ESP will then reboot and connect to the Wi-Fi network with the given values.
   void defineWiFi() {
     Serial.println(F("Setting AP")); 
-    // Remove the password parameter (=NULL), if you want the AP (Access Point) to be open 
+    // Remove the password parameter (or use NULL) => for open access point 
     WiFi.softAP("ESP-WIFI-MANAGER", NULL);
 
     IPAddress IP = WiFi.softAPIP();
@@ -236,7 +236,7 @@ void connectToWifi() {
     getWiFi();              // Get SSID, Password and IP from files
     if(!initWiFi()) {       // If SSID or Password were not stored, manage them and reboot
       defineWiFi();
-      return; 
+      return;
     }
   #else
     initWiFi();     // Initialize Wifi with hardcoded values
