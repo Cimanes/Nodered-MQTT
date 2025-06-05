@@ -1,8 +1,8 @@
 // =============================================
 // LIBRARIES
 // =============================================
+// #include <WiFiUdp.h>
 #include <ESPAsyncWebServer.h>
-#include <WiFiUdp.h>
 #if defined(ESP32)
   #include <WiFi.h>
   // #include <AsyncTCP.h>
@@ -10,7 +10,7 @@
   #include <ESP8266WiFi.h>
   // #include <ESPAsyncTCP.h>
 #endif
-#ifdef useOTA
+#ifdef USE_OTA
   #include <AsyncElegantOTA.h>
 #endif
 
@@ -21,9 +21,8 @@
 AsyncWebServer server(80)               ;   // Required for HTTP 
 WiFiEventHandler wifiConnectHandler     ;   // Event handler for wifi connection
 WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnection
-#define WIFI_MANAGER 
 
-#if defined(WIFI_MANAGER)
+#ifdef WIFI_MANAGER
   // =============================================
   // Wifi Manager Variables: set SSID, Password and IP address
   // =============================================
@@ -56,7 +55,6 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
   // =============================================
   // Hardcoded Wifi Variables: Credentials. 
   // =============================================
-  #define TOLEDO      // OPTIONAL: Choose Wifi credentials [CIMANES, TOLEDO, TRAVEL]
   #if defined(CIMANES)
     const char ssid[] = "Pepe_Cimanes";
     const char pass[] = "Cimanes7581" ;
@@ -64,8 +62,8 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
     const char ssid[] = "MIWIFI_HtR7" ;
     const char pass[] = "TdQTDf3H"    ;
   #elif defined(TRAVEL)
-    const char ssid[] = "John-Rs-Foodhall_EXT" ;
-    const char pass[] = "sive2017"    ;
+    const char ssid[] = SSID_TRAVEL   ;
+    const char pass[] = PASS_TRAVEL   ;
   #endif
 
   const char* esp_ip = "192.168.1.213";
@@ -88,11 +86,15 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
   
   // Function to Initialize Wifi
   bool initWiFi() {
-    if(strcmp(ssid, "") == 0 || strcmp(esp_ip, "") == 0 || strcmp(router, "") == 0 ){
+    if(strcmp(ssid, "") == 0 || strcmp(esp_ip, "") == 0 || strcmp(router, "") == 0 || strcmp(router, "") == 0 ){
       Serial.println(F("Undefined WiFi"));
       return false;
     }
-    
+    if (strcmp(host, "") == 0) {
+      Serial.println(F("Undefined W.S. host"));
+      return false;
+    }
+
     const IPAddress subnet(255, 255, 0, 0);   // Subnet mask required for static IP address
     IPAddress gateway;          // IP address of the router
     IPAddress dns;              // IP address of the DNS (= router)
@@ -100,25 +102,18 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
 
     localIP.fromString(esp_ip);
     gateway.fromString(router);
-    dns.fromString(router);
-    hostIP.fromString(host);
+    dns.fromString(router)    ;
+    hostIP.fromString(host)   ;
 
     if (!WiFi.config(localIP, gateway, subnet, dns)){
       if (Debug) Serial.println(F("STA config Failed"));
       return false;
     }
+
     WiFi.begin(ssid, pass);   // STA mode is default
 
-    Serial.print(F("Connecting .."));
-    while (WiFi.status() != WL_CONNECTED) { 
-      Serial.print('.'); delay(1000);
-    }
-    if (Debug) Serial.println(WiFi.localIP());
-
-    #ifdef useOTA
-      AsyncElegantOTA.begin(&server); // Start OTA
-    #endif
-    Serial.println(F("initWiFi done"));
+    Serial.print(F("Connecting"));
+    while (WiFi.status() != WL_CONNECTED) {  Serial.print('.'); delay(1000); }
     return true;
   }
 
@@ -134,55 +129,51 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
   //          The ESP will then reboot and connect to the Wi-Fi network with the given values.
   void defineWiFi() {
     Serial.println(F("Setting AP")); 
-    // Remove the password parameter (or use NULL) => for open access point 
+    // Remove the password parameter (=NULL), for open AP (Access Point) 
     WiFi.softAP("ESP-WIFI-MANAGER", NULL);
 
     IPAddress IP = WiFi.softAPIP();
     Serial.print(F("AP local IP: "));
     Serial.println(IP);
 
-    // Web Server Root URL
+    // Wifi manager web page on ESP IP root URL
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
       request->send(LittleFS, "/wifimanager.html", "text/html");
     });
     
+    // Receive HTTP POST request with wifi credentials
     server.on("/", HTTP_POST, [](AsyncWebServerRequest *request) {
       int params = request->params();
       for(int i=0;i<params;i++){
         const AsyncWebParameter* p = request->getParam(i);
         if(p->isPost()){
-          // HTTP POST ssid value
-          if (p->name() == PARAM_INPUT_1) {
+          if (p->name() == PARAM_INPUT_1) {         // HTTP POST ssid value
             strncpy(ssid, p->value().c_str(), paramSize - 1);
-            ssid[paramSize - 1] = '\0'; // Ensure null-termination
+            ssid[paramSize - 1] = '\0';
             Serial.printf_P(PSTR("SSID: %s\n"), ssid);
             writeFile(LittleFS, ssidPath, ssid);
           }
-          // HTTP POST pass value
-          else if (p->name() == PARAM_INPUT_2) {
+          else if (p->name() == PARAM_INPUT_2) {    // HTTP POST pass value
             strncpy(pass, p->value().c_str(), paramSize - 1);
-            pass[paramSize - 1] = '\0'; // Ensure null-termination
+            pass[paramSize - 1] = '\0';
             Serial.printf_P(PSTR("Password: %s\n"), pass);
             writeFile(LittleFS, passPath, pass);
           }
-          // HTTP POST esp_ip value
-          else if (p->name() == PARAM_INPUT_3) {
+          else if (p->name() == PARAM_INPUT_3) {    // HTTP POST esp_ip value
             strncpy(esp_ip, p->value().c_str(), paramSize - 1);
-            esp_ip[paramSize - 1] = '\0'; // Ensure null-termination
+            esp_ip[paramSize - 1] = '\0';
             Serial.printf_P(PSTR("ESP IP: %s\n"), esp_ip);
             writeFile(LittleFS, ipPath, esp_ip);
           }
-          // HTTP POST router IP value
-          else if (p->name() == PARAM_INPUT_4) {
+          else if (p->name() == PARAM_INPUT_4) {    // HTTP POST router IP value
             strncpy(router, p->value().c_str(), paramSize - 1);
-            router[paramSize - 1] = '\0'; // Ensure null-termination
+            router[paramSize - 1] = '\0';
             Serial.printf_P(PSTR("Router IP: %s\n"), router);
             writeFile(LittleFS, routerPath, router);
           }
-          // HTTP POST node-red host IP value
-          else if (p->name() == PARAM_INPUT_5) {
+          else if (p->name() == PARAM_INPUT_5) {    // HTTP POST node-red host IP value
             strncpy(host, p->value().c_str(), paramSize - 1);
-            host[paramSize - 1] = '\0'; // Ensure null-termination
+            host[paramSize - 1] = '\0';
             Serial.printf_P(PSTR("Host IP: %s\n"), host);
             writeFile(LittleFS, hostPath, host);
           }           
@@ -190,12 +181,17 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
         }
       }
       request->send(200, "text/plain", "Done. ESP rebooting, connect to your router. ESP IP address: " + String(esp_ip));
-      reboot = true;
+      if (Debug) Serial.println(F("Rebooting"));
+      #if defined(ESP32)  
+        timer.setTimeout(5000, []() { esp_restart(); } );
+      #elif defined(ESP8266)
+        timer.setTimeout(5000, []() { ESP.restart(); } );
+      #endif
     });
     
     // Serve files (HTML, JS, CSS and favicon) from LittleFS when requested by the root URL. 
     server.serveStatic("/", LittleFS, "/");
-    server.begin(); // Start the server.
+    server.begin();
     Serial.println(F("defineWifi done"));
   }
 
@@ -204,11 +200,11 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
 // Hard coded Wifi initialization 
 //==================================================
   void initWiFi() {
-    const IPAddress subnet(255, 255, 0, 0);   // Subnet mask required for static IP address
-    const IPAddress gateway(192, 168, 1, 1);  // Had coded router IP
-    const IPAddress dns(192, 168, 1, 1);      // Had coded router IP
-    IPAddress localIP;                        // IP address of the ESP
-    localIP.fromString(esp_ip);
+    const IPAddress subnet(255, 255, 0, 0)  ;   // Subnet mask required for static IP address
+    const IPAddress gateway(192, 168, 1, 1) ;   // Had coded router IP
+    const IPAddress dns(192, 168, 1, 1)     ;   // Had coded router IP
+    IPAddress localIP                       ;   // IP address of the ESP
+    localIP.fromString(esp_ip)              ;            
 
     if (!WiFi.config(localIP, gateway, subnet, dns)){
       if (Debug) Serial.println(F("STA config Failed"));
@@ -216,14 +212,11 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
     }
     WiFi.begin(ssid, pass);   // STA mode is default
 
-    Serial.print(F("Connecting to WiFi .."));
+    Serial.print(F("Connecting"));
     while (WiFi.status() != WL_CONNECTED) {
       Serial.print('.');
       delay(1000);
     }
-    #ifdef useOTA
-      AsyncElegantOTA.begin(&server); // Start OTA
-    #endif
     Serial.println(WiFi.localIP());
   }
 #endif
@@ -232,13 +225,20 @@ WiFiEventHandler wifiDisconnectHandler  ;   // Event handler for wifi disconnect
 // Connect to WiFi (common function)
 //==================================================
 void connectToWifi() {
-  #if defined(WIFI_MANAGER)  // Initialize Wifi, optional use WIFI_MANAGER 
-    getWiFi();              // Get SSID, Password and IP from files
-    if(!initWiFi()) {       // If SSID or Password were not stored, manage them and reboot
-      defineWiFi();
-      return;
-    }
+  #ifdef WIFI_MANAGER   // Initialize Wifi using wifi manager. 
+    getWiFi();          // Get SSID, Password and IP from files
+    if(!initWiFi()) defineWiFi(); // If credentials not found, manage wifi and reboot
   #else
-    initWiFi();     // Initialize Wifi with hardcoded values
+    initWiFi();         // Initialize Wifi with hardcoded values
   #endif
 }
+
+#ifdef USE_OTA
+  void startOTAServer() {
+    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
+      request->send(200, "text/plain", "OTA ready. Connect to " + String(esp_ip) + "/update");
+    });
+    AsyncElegantOTA.begin(&server);
+    server.begin();
+  }
+#endif

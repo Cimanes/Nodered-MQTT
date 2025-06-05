@@ -1,11 +1,13 @@
 //======================================================
 // VARIABLES
 //======================================================
-struct Handler {            // Handler structure to manage handlers
-  const char* topic;
+const size_t PRINT_LEN = 8;       // Size limit for mqtt received "payload" (used to limit serial.print)
+
+struct Handler {                  // Handler structure to manage handlers
+  const char* topic;    
   void (*handler)(const char* topic, const char* payload);
 };
-const Handler handlers[] = {
+const Handler handlers[] = {      // topic:
   { "gpio/", handleGPIO },        // gpio/#
   { "debug", handleDebug },       // esp/debug
   { "interval", handleInterval }, // bme/interval
@@ -13,11 +15,15 @@ const Handler handlers[] = {
   { "espIP", handleIP},           // esp/espIP
   { "reboot", handleReboot },     // esp/reboot
   #ifdef WIFI_MANAGER
-  { "wifi", handleWifi }          // esp/wifi
+    { "wifi", handleWifi },       // esp/wifi
+  #endif
+  #ifdef USE_OTA
+    { "OTA", handleOTA }
   #endif
 };
 const byte handlerCount = sizeof(handlers) / sizeof(handlers[0]);
-unsigned long mqttReconnectTimerID; // Timer to reconnect to MQTT after failed
+const uint16_t wifiReconnectTimer = 3000; // Delay to reconnect to Wifi after failed
+const uint16_t mqttReconnectTimer = 15000; // Delay to reconnect to Wifi after failed
 
 //======================================================
 // MQTT EVENT FUNCTIONS
@@ -30,6 +36,7 @@ void onMqttConnect(bool sessionPresent) {
     mqttClient.subscribe(subTopics[i], 2);
     if(Debug) Serial.println(subTopics[i]);
   }
+  timer.setTimeout(1000, publishBME);
 }
 
 // Attempt re-connect to MQTT when connection is lost
@@ -37,34 +44,31 @@ void onmqttDisconnect(AsyncMqttClientDisconnectReason reason) {
   if (Debug) { Serial.printf_P(PSTR("MQTT Disconnected: %i \n"), (int)reason); }
   if (WiFi.isConnected()) {
     if (Debug) Serial.println(F("MQTT re-connecting..."));
-    mqttReconnectTimerID = timer.setTimeout(3000, []() {mqttClient.connect();});
+    mqttReconnectTimerID = timer.setTimeout(mqttReconnectTimer, []() { mqttClient.connect();});
   }
 }
 
 void onmqttSubscribe(uint16_t packetId, uint8_t qos) {
-  if (Debug) Serial.println(F("Sub. acknowledged"));
+  if (Debug) Serial.printf_P(PSTR("Sub OK. #%u \n"), packetId);
 }
 
 void onmqttUnsubscribe(uint16_t packetId) {
-  if (Debug) Serial.println(F("Unsub. acknowledged"));
+  if (Debug) Serial.printf_P(PSTR("Unsub OK. #%u \n"), packetId);
 }
 
 void onmqttPublish(uint16_t packetId) {
   if (Debug) Serial.printf_P(PSTR("Pub OK. #%u \n"), packetId);
 }
 
-void onmqttMessage(const char* topic, const char* payload, const AsyncMqttClientMessageProperties properties, size_t len, size_t index, size_t total) {
+// Note: expected payload is a C-string. MQTT payload is typically "not pure" --> clean it
+// Empty payload or numbers will create problems with serial.print and with handlers.
+void onmqttMessage(const char* topic, char* payload, const AsyncMqttClientMessageProperties properties, const size_t len, const size_t index, const size_t total) {
   if (Debug) {
-    static const byte printLen = min(len, size_t(PRINT_LEN));
-    char payloadPrint[printLen + 1];
-    memcpy(payloadPrint, payload, len);
-    payloadPrint[printLen] = '\0';      // Ensure it's a valid C-string
- 
-    Serial.print(F("Received "));
-    Serial.printf_P(PSTR("topic: %s, payload: %s\n"), topic, payloadPrint);
-    // More properties available:
-    // Serial.printf_P(PSTR("Pub received. \n topic: %s, qos: %i, dup: %i, retain: %i, len: %i, index: %i, total: %i \n"), topic, properties.qos, properties.dup, properties.retain, len, index, total);
+    memcpy(payload + min(len, PRINT_LEN), "\0", 1);  // Ensure it's a valid C-string
+    Serial.printf_P(PSTR(">[MQTT] %s: %s\n"), topic, payload);
+    // Serial.printf_P(PSTR("qos: %i, dup: %i, retain: %i, len: %i, index: %i, total: %i \n"), properties.qos, properties.dup, properties.retain, len, index, total);
   }
+
   // Process MQTT messages according to handlers
   for (byte i = 0; i < handlerCount; i++) {
     if (strstr(topic, handlers[i].topic)) {
@@ -84,6 +88,7 @@ void initMqtt() {
   mqttClient.onPublish(onmqttPublish);
   mqttClient.setServer(MQTT_HOST, MQTT_PORT);
   mqttClient.setCredentials(BROKER_USER, BROKER_PASS);
+  mqttClient.setKeepAlive(MQTT_PING_INTERVAL);
   if (Debug) Serial.println(F("init MQTT done."));
 }
 
@@ -91,6 +96,10 @@ void initMqtt() {
 // WIFI EVENT FUNCTIONS
 //======================================================
 void onwifiConnect(const WiFiEventStationModeGotIP& event) {
+  if (Debug) { 
+    Serial.println(WiFi.localIP());
+    Serial.println(F("initWiFi done"));
+  }    
   initMqtt();
   if (Debug) Serial.println(F("MQTT Connecting..."));
   mqttClient.connect();
@@ -99,5 +108,5 @@ void onwifiConnect(const WiFiEventStationModeGotIP& event) {
 void onwifiDisconnect(const WiFiEventStationModeDisconnected& event) {
   if (Debug)   Serial.println(F("Wifi disconnected."));
   timer.deleteTimer(mqttReconnectTimerID);  // avoid reconnect to MQTT while reconnecting to Wi-Fi
-  timer.setTimeout(2000, connectToWifi);    // attempt to reconnect to WiFi
+  timer.setTimeout(wifiReconnectTimer, connectToWifi);    // attempt to reconnect to WiFi
 }

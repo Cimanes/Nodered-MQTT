@@ -7,7 +7,7 @@
 // VARIABLES    
 //======================================================
 StaticJsonDocument<100> jsonDoc;  // Dummy JSON document
-static char jsonBuffer[100];      // Dummy char array to be sent via MQTT
+static char strBuffer[100];      // Dummy char array to send MQTT message
 
 //======================================================
 // FUNCTIONS    
@@ -23,8 +23,8 @@ static char jsonBuffer[100];      // Dummy char array to be sent via MQTT
 void makeJsonArray(const byte numKeys, const char* keys[], int16_t values[]) {
   jsonDoc.clear();  // Clear the document to avoid leftover data
   for (byte i = 0; i < numKeys; i++)  { jsonDoc[keys[i]] = values[i]; }
-  serializeJson(jsonDoc, jsonBuffer, sizeof(jsonBuffer)); // Convert jsonDoc to char array
-  // if (Debug) Serial.println(jsonBuffer);               // Optional debug output
+  serializeJson(jsonDoc, strBuffer, sizeof(strBuffer)); // Convert jsonDoc to char array
+  if (Debug) Serial.printf_P(PSTR("[MQTT]> %s\n"), strBuffer);  // Optional debug output
 }
 
 // ============================= Not used in this project
@@ -33,8 +33,8 @@ void makeJsonArray(const byte numKeys, const char* keys[], int16_t values[]) {
 //   // Add key-value pair to the JSON object "jsonDoc"
 //   jsonDoc["topic"] = key;
 //   jsonDoc["payload"] = value;
-//   serializeJson(jsonDoc, jsonBuffer, sizeof(jsonBuffer)); // Convert jsonDoc to char array
-//   if (Debug) Serial.println(jsonBuffer);                 // Optional debug output
+//   serializeJson(jsonDoc, strBuffer, sizeof(strBuffer)); // Convert jsonDoc to char array
+//   if (Debug) Serial.printf_P(PSTR("[MQTT]> %s\n"), strBuffer);  // Optional debug output
 // }
 
 // ============================= Not used in this project
@@ -45,7 +45,7 @@ void makeJsonArray(const byte numKeys, const char* keys[], int16_t values[]) {
 //   jsonDoc["topic"] = key;
 //   jsonDoc["payload"] = value;
 
-//   serializeJson(jsonDoc, jsonBuffer, sizeof(jsonBuffer)); // Convert jsonDoc to char array
-//   // if (Debug) Serial.println(jsonBuffer);             // Optional debug output
+//   serializeJson(jsonDoc, strBuffer, sizeof(strBuffer)); // Convert jsonDoc to char array
+//   if (Debug) Serial.printf_P(PSTR("[MQTT]> %s\n"), strBuffer);  // Optional debug output
 // }
 

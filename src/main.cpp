@@ -1,12 +1,17 @@
+//======================================
+// LIBRARIES
+//======================================
 #include "00_globals.hpp"
-#include "01_reboot.hpp"
-#include "02_json.hpp"
-#include "03_fileSys.hpp"
-#include "04_wifi.hpp"
-#include "05_bme.hpp"
-#include "06_mqtt.hpp"
-#include "07_events.hpp"
+#include "01_json.hpp"
+#include "02_fileSys.hpp"
+#include "03_wifi.hpp"
+#include "04_bme.hpp"
+#include "05_mqtt.hpp"
+#include "06_events.hpp"
 
+//======================================
+// SETUP
+//======================================
 void setup() {
   Serial.begin(115200);
   initFS();       // Initialize File System
@@ -19,8 +24,10 @@ void setup() {
   connectToWifi();
 
   // Set timers for BME-read and Reboot-check
-  initReboot();
-  bmeTimerID = timer.setInterval(bmeInterval, publishBME);
+  bmeTimerID = timer.setInterval(1000 * bmeInterval, publishBME);
 }
 
+//======================================
+// LOOP
+//======================================
 void loop() { timer.run(); }

@@ -49,12 +49,13 @@
             "6ae75497c6b7045c",
             "42457aa4ad095f87",
             "42e0f40e6b94bfcf",
-            "bfbd6f3e61b8b3c4"
+            "bfbd6f3e61b8b3c4",
+            "6c880a986fa39ea5"
         ],
         "x": 14,
         "y": 59,
-        "w": 892,
-        "h": 642
+        "w": 872,
+        "h": 602
     },
     {
         "id": "21a58cbb662a2d77",
@@ -78,7 +79,6 @@
             "cce5b66e0055a7e1",
             "329c5f5460d2b106",
             "efc8cfa8423166c2",
-            "9a848e28c93fdcd4",
             "4d97fce4043366db",
             "4df5c692eaf2da97",
             "e6f1b0fc7afb22ec",
@@ -92,17 +92,19 @@
             "baf99f2287f0dbb0",
             "b18baec54d569ee2",
             "b70e9084f3b8046b",
-            "2e2bf81fd0f57c1f",
-            "d7cafb1ff1371251",
             "31850e8bb5cd1657",
             "64c60beb8a3f6758",
             "79c47b6764732b12",
-            "b1939cd3dce59041"
+            "b1939cd3dce59041",
+            "257486427dccd228",
+            "0e02d0fa1c8ba111",
+            "b9f2e3d1b77e8dee",
+            "d725b8c875d5d731"
         ],
         "x": 14,
-        "y": 719,
-        "w": 1072,
-        "h": 502
+        "y": 679,
+        "w": 1032,
+        "h": 522
     },
     {
         "id": "752e8cf861cf994f",
@@ -117,8 +119,6 @@
         },
         "nodes": [
             "44e80559e2fe8234",
-            "9408664605020b12",
-            "e1d37be25fd797d6",
             "9d2ce34f03259bbf",
             "10db6128cb5e255a",
             "7d9bb908da0322fb",
@@ -128,22 +128,16 @@
             "d16999edcbece664",
             "5edec3db1778913c",
             "12022de2a2018bda",
-            "268c398ce7d2aedc",
-            "1ce6790e56252c04",
-            "9b27c9f2292fd667",
-            "818252558bc7c823",
-            "b6de17e1a7f1e628",
             "a443770a02d49986",
             "8d829409618a2baf",
             "7fa67635955b4707",
-            "257486427dccd228",
-            "220c50c70202e2d2",
-            "cc3da2749a513ceb"
+            "4e3fedf94445d8f9",
+            "5680f40b86eb811e"
         ],
         "x": 14,
-        "y": 1239,
-        "w": 1072,
-        "h": 482
+        "y": 1219,
+        "w": 872,
+        "h": 402
     },
     {
         "id": "a106edce8b444678",
@@ -202,8 +196,8 @@
         "height": 8,
         "className": "col1",
         "interpolation": "linear",
-        "x": 830,
-        "y": 1060,
+        "x": 790,
+        "y": 1000,
         "wires": [
             [
                 "baf99f2287f0dbb0"
@@ -267,8 +261,8 @@
         "height": 8,
         "className": "",
         "interpolation": "linear",
-        "x": 830,
-        "y": 780,
+        "x": 790,
+        "y": 740,
         "wires": [
             [
                 "b18baec54d569ee2"
@@ -332,8 +326,8 @@
         "height": 8,
         "className": "col1",
         "interpolation": "linear",
-        "x": 820,
-        "y": 920,
+        "x": 800,
+        "y": 880,
         "wires": [
             [
                 "4083458ef90c25ae"
@@ -353,8 +347,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 830,
-        "y": 820,
+        "x": 790,
+        "y": 780,
         "wires": [
             [
                 "d2758600007a22ac"
@@ -377,8 +371,8 @@
         "retentionPolicyV18Flux": "",
         "org": "Cimanes",
         "bucket": "Pi01",
-        "x": 990,
-        "y": 820,
+        "x": 950,
+        "y": 780,
         "wires": []
     },
     {
@@ -397,8 +391,8 @@
         "retentionPolicyV18Flux": "",
         "org": "Cimanes",
         "bucket": "Pi01",
-        "x": 990,
-        "y": 880,
+        "x": 950,
+        "y": 840,
         "wires": []
     },
     {
@@ -414,8 +408,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 820,
-        "y": 1020,
+        "x": 800,
+        "y": 960,
         "wires": [
             [
                 "cce5b66e0055a7e1"
@@ -438,8 +432,8 @@
         "retentionPolicyV18Flux": "",
         "org": "Cimanes",
         "bucket": "Pi01",
-        "x": 980,
-        "y": 1020,
+        "x": 940,
+        "y": 960,
         "wires": []
     },
     {
@@ -450,7 +444,7 @@
         "group": "73528bb91092cced",
         "name": "BME Interval",
         "label": "interval (s)",
-        "order": 6,
+        "order": 8,
         "width": 3,
         "height": 0,
         "topic": "topic",
@@ -469,7 +463,7 @@
         "iconInnerPosition": "inside",
         "spinner": "default",
         "x": 370,
-        "y": 1180,
+        "y": 1160,
         "wires": [
             [
                 "b1939cd3dce59041"
@@ -491,8 +485,8 @@
         "correl": "",
         "expiry": "",
         "broker": "9f9e276987b2fb1f",
-        "x": 830,
-        "y": 1180,
+        "x": 790,
+        "y": 1160,
         "wires": []
     },
     {
@@ -513,7 +507,7 @@
         "name": "Description",
         "info": "Receive BME readings via MQTT protocol\nTemperature, pressure and Rel. Humidity.\nFor each variable:\n- Display value in a gaugge.\n- Record a chart trend.\n- Send to Influx Data Base.\n- Send to the Debug console.\n\n",
         "x": 100,
-        "y": 760,
+        "y": 720,
         "wires": []
     },
     {
@@ -532,7 +526,7 @@
         "expiry": "",
         "broker": "9f9e276987b2fb1f",
         "x": 800,
-        "y": 400,
+        "y": 360,
         "wires": []
     },
     {
@@ -563,7 +557,7 @@
         "officon": "",
         "offcolor": "",
         "x": 380,
-        "y": 400,
+        "y": 360,
         "wires": [
             [
                 "a7c3a74e711d2061"
@@ -586,7 +580,7 @@
         "expiry": "",
         "broker": "9f9e276987b2fb1f",
         "x": 790,
-        "y": 460,
+        "y": 420,
         "wires": []
     },
     {
@@ -597,7 +591,7 @@
         "name": "Boiler",
         "label": "Boiler",
         "group": "eea751cd59c30bc9",
-        "order": 3,
+        "order": 2,
         "width": 2,
         "height": 0,
         "passthru": true,
@@ -617,7 +611,7 @@
         "officon": "",
         "offcolor": "",
         "x": 370,
-        "y": 460,
+        "y": 420,
         "wires": [
             [
                 "e7484c10d18a08e0"
@@ -640,7 +634,7 @@
         "expiry": "",
         "broker": "9f9e276987b2fb1f",
         "x": 790,
-        "y": 520,
+        "y": 480,
         "wires": []
     },
     {
@@ -683,7 +677,7 @@
         "colorThumb": "",
         "showTextField": true,
         "x": 390,
-        "y": 560,
+        "y": 520,
         "wires": [
             [
                 "bf2956fd00171c01",
@@ -697,9 +691,9 @@
         "z": "4626f4eca8ae462b",
         "g": "7b0e3269a6233dda",
         "group": "eea751cd59c30bc9",
-        "name": "Input Deadband",
+        "name": "Deadband",
         "label": "Deadband",
-        "order": 6,
+        "order": 7,
         "width": 2,
         "height": 0,
         "topic": "deadband",
@@ -716,9 +710,9 @@
         "icon": "",
         "iconPosition": "left",
         "iconInnerPosition": "inside",
-        "spinner": "default",
-        "x": 400,
-        "y": 520,
+        "spinner": "stacked",
+        "x": 390,
+        "y": 480,
         "wires": [
             [
                 "bf2956fd00171c01"
@@ -748,7 +742,7 @@
         "payload": "0.5",
         "payloadType": "num",
         "x": 180,
-        "y": 520,
+        "y": 480,
         "wires": [
             [
                 "cc7b1e9ae57a305a"
@@ -778,7 +772,7 @@
         "payload": "19",
         "payloadType": "num",
         "x": 180,
-        "y": 560,
+        "y": 520,
         "wires": [
             [
                 "b56b0a394afb449e"
@@ -808,7 +802,7 @@
         "payload": "900",
         "payloadType": "num",
         "x": 150,
-        "y": 1180,
+        "y": 1160,
         "wires": [
             [
                 "79c47b6764732b12"
@@ -848,7 +842,7 @@
         "pointerupPayload": "",
         "pointerupPayloadType": "str",
         "x": 390,
-        "y": 600,
+        "y": 560,
         "wires": [
             [
                 "d527ab69da44aabb"
@@ -871,7 +865,7 @@
         "expiry": "",
         "broker": "9f9e276987b2fb1f",
         "x": 610,
-        "y": 340,
+        "y": 300,
         "wires": []
     },
     {
@@ -902,7 +896,7 @@
         "officon": "",
         "offcolor": "",
         "x": 390,
-        "y": 340,
+        "y": 300,
         "wires": [
             [
                 "4f3ec602bbdddf02"
@@ -925,7 +919,7 @@
         "expiry": "",
         "broker": "9f9e276987b2fb1f",
         "x": 800,
-        "y": 600,
+        "y": 560,
         "wires": []
     },
     {
@@ -949,38 +943,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 150,
-        "y": 1120,
+        "x": 130,
+        "y": 1040,
         "wires": [
-            [
-                "9a848e28c93fdcd4",
-                "d7cafb1ff1371251"
-            ]
+            []
         ]
-    },
-    {
-        "id": "9a848e28c93fdcd4",
-        "type": "ui-text",
-        "z": "4626f4eca8ae462b",
-        "d": true,
-        "g": "21a58cbb662a2d77",
-        "group": "73528bb91092cced",
-        "order": 8,
-        "width": 2,
-        "height": 0,
-        "name": "Time",
-        "label": "Last Reading: ",
-        "format": "{{msg.payload}}",
-        "layout": "row-left",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#717171",
-        "wrapText": false,
-        "className": "",
-        "x": 310,
-        "y": 1100,
-        "wires": []
     },
     {
         "id": "1ef320855f8a59b4",
@@ -1009,8 +976,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 830,
-        "y": 880,
+        "x": 790,
+        "y": 840,
         "wires": [
             [
                 "4c21656d105d9a41"
@@ -1027,8 +994,8 @@
         "links": [
             "74a3395dbb676672"
         ],
-        "x": 645,
-        "y": 820,
+        "x": 635,
+        "y": 760,
         "wires": []
     },
     {
@@ -1044,8 +1011,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 620,
-        "y": 520,
+        "x": 600,
+        "y": 480,
         "wires": [
             [
                 "2f149303cc7a4594"
@@ -1061,8 +1028,8 @@
         "links": [
             "4df5c692eaf2da97"
         ],
-        "x": 705,
-        "y": 660,
+        "x": 685,
+        "y": 620,
         "wires": [
             [
                 "f3a98ea92ce2c2a0"
@@ -1078,8 +1045,8 @@
         "links": [
             "c6288db953c65643"
         ],
-        "x": 565,
-        "y": 780,
+        "x": 595,
+        "y": 720,
         "wires": [
             [
                 "94f7ce855f618ec2"
@@ -1092,7 +1059,7 @@
         "z": "4626f4eca8ae462b",
         "g": "7b0e3269a6233dda",
         "group": "eea751cd59c30bc9",
-        "order": 7,
+        "order": 6,
         "width": 2,
         "height": 0,
         "name": "Temperature",
@@ -1105,8 +1072,8 @@
         "color": "#717171",
         "wrapText": false,
         "className": "",
-        "x": 810,
-        "y": 660,
+        "x": 790,
+        "y": 620,
         "wires": []
     },
     {
@@ -1120,7 +1087,7 @@
             "e6f1b0fc7afb22ec"
         ],
         "x": 535,
-        "y": 560,
+        "y": 520,
         "wires": []
     },
     {
@@ -1129,15 +1096,15 @@
         "z": "4626f4eca8ae462b",
         "g": "21a58cbb662a2d77",
         "name": "Get BME Readings",
-        "func": "let msgHum = null, \n    msgPres = null,\n    msgSLP = null,\n    msgTemp = null, \n    msgTime = null;\n\n// Update variables with topic in context (elevation):\nif (msg.topic == \"elevation\") { context.set(\"elevation\", msg.payload); }\n\n// Update BME readings (msg received with no topic):\nelse { \n    const obj = msg.payload;\n    msgTemp = { payload: obj.temp / 10, topic: \"temp\" };\n    msgHum = { payload: obj.hum / 10 };\n    msgPres = { payload: obj.pres / 10 };\n    msgTime = { payload: new Date().toLocaleString(\"es-ES\") };\n\n    flow.set(\"temp\", obj.temp / 10);\n    context.set(\"pres\", obj.pres / 10);\n}\n\nlet T = flow.get(\"temp\");\nconst P = context.get(\"pres\");\nconst H = context.get(\"elevation\");\nif (T === undefined || P === undefined || H === undefined) {\n    node.warn(\"Missing required inputs. Waiting for all inputs to be available.\");\n    return null; // Don't compute until all data is available\n}\n\n// Calculation of Sea Level Pressure:\n// T = Temperature at station(in K — Kelvin)\n// L = Temperature lapse rate ≈ 0.0065 K / m\n// g = Gravitational acceleration ≈ 9.80665 m / s²\n// M = Molar mass of dry air ≈ 0.0289644 kg / mol\n// R = Universal gas constant ≈ 8.31432 N·m / (mol·K)\n// exp = -(g * M)/(R * L)\n\nT += 273.15;\nconst L = 0.0065,\n    exp = -5.257;\n\nmsgSLP = { payload: Math.round(P * Math.pow(T / (T + (L * H)), exp)) }\n\nreturn [msgTemp, msgSLP, msgPres, msgHum, msgTime];",
-        "outputs": 5,
+        "func": "let msgHum = null, \n    msgPres = null,\n    msgSLP = null,\n    msgTemp = null, \n    msgTime = null,\n    msgOK = null;\n\n// Update variables with topic in context (elevation):\nif (msg.topic == \"elevation\") { context.set(\"elevation\", msg.payload); }\n\n// Update BME readings (msg received with no topic):\nelse { \n    const obj = msg.payload;\n    msgTemp = { payload: obj.temp / 10, topic: \"temp\" };\n    msgHum = { payload: obj.hum / 10 };\n    msgPres = { payload: obj.pres / 10 };\n    msgTime = { payload: new Date().toLocaleString(\"es-ES\") };\n    msgOK = { payload: obj.ok };\n\n    flow.set(\"temp\", obj.temp / 10);\n    context.set(\"pres\", obj.pres / 10);\n}\n\nlet T = flow.get(\"temp\");\nconst P = context.get(\"pres\");\nconst H = context.get(\"elevation\");\nif (T === undefined || P === undefined || H === undefined) {\n    node.warn(\"Missing required inputs. Waiting for all inputs to be available.\");\n    return null; // Don't compute until all data is available\n}\n\n// Calculation of Sea Level Pressure:\n// T = Temperature at station(in K — Kelvin)\n// L = Temperature lapse rate ≈ 0.0065 K / m\n// g = Gravitational acceleration ≈ 9.80665 m / s²\n// M = Molar mass of dry air ≈ 0.0289644 kg / mol\n// R = Universal gas constant ≈ 8.31432 N·m / (mol·K)\n// exp = -(g * M)/(R * L)\n\nT += 273.15;\nconst L = 0.0065,\n    exp = -5.255;\n\nmsgSLP = { payload: Math.round(P * Math.pow(1- (L * H) / T, exp)) }\n\nreturn [msgTemp, msgSLP, msgPres, msgHum, msgTime, msgOK];",
+        "outputs": 6,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 490,
-        "y": 960,
+        "y": 920,
         "wires": [
             [
                 "4df5c692eaf2da97",
@@ -1157,7 +1124,12 @@
             ],
             [
                 "b70e9084f3b8046b",
-                "2e2bf81fd0f57c1f"
+                "257486427dccd228"
+            ],
+            [
+                "0e02d0fa1c8ba111",
+                "b9f2e3d1b77e8dee",
+                "d725b8c875d5d731"
             ]
         ]
     },
@@ -1169,7 +1141,7 @@
         "group": "73528bb91092cced",
         "name": "elevation",
         "label": "Elevation",
-        "order": 5,
+        "order": 7,
         "width": 3,
         "height": 0,
         "topic": "elevation",
@@ -1188,7 +1160,7 @@
         "iconInnerPosition": "inside",
         "spinner": "default",
         "x": 300,
-        "y": 920,
+        "y": 880,
         "wires": [
             [
                 "ddd8aacba84f2c47"
@@ -1214,7 +1186,7 @@
         "payload": "529",
         "payloadType": "num",
         "x": 150,
-        "y": 920,
+        "y": 880,
         "wires": [
             [
                 "268cd292df4a3b56"
@@ -1227,7 +1199,7 @@
         "z": "4626f4eca8ae462b",
         "g": "21a58cbb662a2d77",
         "group": "73528bb91092cced",
-        "order": 1,
+        "order": 3,
         "width": 3,
         "height": 0,
         "name": "Pres",
@@ -1241,74 +1213,8 @@
         "wrapText": false,
         "className": "",
         "x": 810,
-        "y": 960,
+        "y": 920,
         "wires": []
-    },
-    {
-        "id": "9408664605020b12",
-        "type": "mqtt in",
-        "z": "4626f4eca8ae462b",
-        "d": true,
-        "g": "752e8cf861cf994f",
-        "name": "fb/led",
-        "topic": "fb/led",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "9f9e276987b2fb1f",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 110,
-        "y": 1560,
-        "wires": [
-            [
-                "e1d37be25fd797d6"
-            ]
-        ]
-    },
-    {
-        "id": "e1d37be25fd797d6",
-        "type": "function",
-        "z": "4626f4eca8ae462b",
-        "d": true,
-        "g": "752e8cf861cf994f",
-        "name": "Get GPIO Fdback",
-        "func": "const topicMap = {\n    \"fb/interval\": 0,\n    heater: 1,\n    boiler: 2,\n    led: 3,\n    debug: 4,\n    \"fb/espIP\": 5,\n    wifi: 6,\n    \"\": 7\n};\n\nlet result = Array(8).fill(null);\nif (topicMap.hasOwnProperty(msg.topic)) {\n    result[topicMap[msg.topic]] = msg;\n}\nreturn result;\n\n\n// let result = Array(8).fill(null);\n// switch (msg.topic) {\n//     case \"interval\":    result[0] = msg; break;\n//     case \"heater\":      result[1] = msg; break;\n//     case \"boiler\":      result[2] = msg; break;\n//     case \"debug\":       result[3] = msg; break;\n//     case \"led\":         result[4] = msg; break;\n//     case \"espIP\":       result[5] = msg; break;\n//     case \"wifi\":        result[6] = msg;\n//         msg.payload = '<div style=\"color: #065f46; background-color: #2e2; padding: 2rem; border-radius: 0.375rem;\">✅ Wifi Cleared. Reboot ESP</div>';\n//         break;\n//     default: result[7] = msg;;\n//         msg.payload = \"ws failed\";\n// }\n// return result;",
-        "outputs": 8,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 430,
-        "y": 1560,
-        "wires": [
-            [
-                "0fab20d54678aa7a"
-            ],
-            [
-                "35633ed2c71b93f1"
-            ],
-            [
-                "10db6128cb5e255a"
-            ],
-            [
-                "7d9bb908da0322fb"
-            ],
-            [
-                "bf699921c67c5efe"
-            ],
-            [
-                "d16999edcbece664"
-            ],
-            [
-                "5edec3db1778913c"
-            ],
-            [
-                "9d2ce34f03259bbf"
-            ]
-        ]
     },
     {
         "id": "84817230c046ae3e",
@@ -1343,7 +1249,7 @@
         "pointerupPayload": "",
         "pointerupPayloadType": "str",
         "x": 390,
-        "y": 260,
+        "y": 220,
         "wires": [
             [
                 "bdc371ca838b5cc3"
@@ -1383,7 +1289,7 @@
         "pointerupPayload": "",
         "pointerupPayloadType": "str",
         "x": 390,
-        "y": 300,
+        "y": 260,
         "wires": [
             [
                 "6fba658056823632"
@@ -1406,7 +1312,7 @@
         "expiry": "",
         "broker": "9f9e276987b2fb1f",
         "x": 620,
-        "y": 260,
+        "y": 220,
         "wires": []
     },
     {
@@ -1425,7 +1331,7 @@
         "expiry": "",
         "broker": "9f9e276987b2fb1f",
         "x": 800,
-        "y": 300,
+        "y": 260,
         "wires": []
     },
     {
@@ -1433,7 +1339,7 @@
         "type": "debug",
         "z": "4626f4eca8ae462b",
         "g": "752e8cf861cf994f",
-        "name": "ws failed",
+        "name": "debug: ws failed",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -1442,8 +1348,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 800,
-        "y": 1600,
+        "x": 760,
+        "y": 1580,
         "wires": []
     },
     {
@@ -1453,7 +1359,7 @@
         "g": "752e8cf861cf994f",
         "name": "Boiler Led",
         "group": "1f360b16b32ec829",
-        "order": 4,
+        "order": 3,
         "width": 2,
         "height": "1",
         "label": "Boiler",
@@ -1475,8 +1381,8 @@
         "shape": "square",
         "showBorder": false,
         "showGlow": false,
-        "x": 820,
-        "y": 1400,
+        "x": 800,
+        "y": 1380,
         "wires": []
     },
     {
@@ -1486,7 +1392,7 @@
         "g": "752e8cf861cf994f",
         "name": "LED Led",
         "group": "1f360b16b32ec829",
-        "order": 3,
+        "order": 4,
         "width": 2,
         "height": 0,
         "label": "Led",
@@ -1508,8 +1414,8 @@
         "shape": "square",
         "showBorder": false,
         "showGlow": false,
-        "x": 820,
-        "y": 1440,
+        "x": 800,
+        "y": 1460,
         "wires": []
     },
     {
@@ -1519,7 +1425,7 @@
         "g": "752e8cf861cf994f",
         "name": "Debug Led",
         "group": "1f360b16b32ec829",
-        "order": 2,
+        "order": 5,
         "width": 2,
         "height": "1",
         "label": "Debug",
@@ -1541,8 +1447,8 @@
         "shape": "square",
         "showBorder": false,
         "showGlow": false,
-        "x": 810,
-        "y": 1480,
+        "x": 790,
+        "y": 1420,
         "wires": []
     },
     {
@@ -1552,7 +1458,7 @@
         "g": "752e8cf861cf994f",
         "name": "Heater Led",
         "group": "1f360b16b32ec829",
-        "order": 1,
+        "order": 2,
         "width": 2,
         "height": 0,
         "label": "Heater",
@@ -1574,8 +1480,8 @@
         "shape": "square",
         "showBorder": false,
         "showGlow": false,
-        "x": 810,
-        "y": 1360,
+        "x": 790,
+        "y": 1500,
         "wires": []
     },
     {
@@ -1597,8 +1503,8 @@
         "color": "#717171",
         "wrapText": false,
         "className": "",
-        "x": 800,
-        "y": 1320,
+        "x": 780,
+        "y": 1340,
         "wires": []
     },
     {
@@ -1620,8 +1526,8 @@
         "color": "#717171",
         "wrapText": false,
         "className": "",
-        "x": 800,
-        "y": 1520,
+        "x": 780,
+        "y": 1540,
         "wires": []
     },
     {
@@ -1644,8 +1550,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 800,
-        "y": 1560,
+        "x": 620,
+        "y": 1300,
         "wires": [
             [
                 "12022de2a2018bda"
@@ -1671,8 +1577,8 @@
         "raw": true,
         "className": "",
         "name": "Wifi Reset",
-        "x": 990,
-        "y": 1560,
+        "x": 790,
+        "y": 1300,
         "wires": [
             []
         ]
@@ -1715,7 +1621,7 @@
                 "module": "os"
             }
         ],
-        "x": 370,
+        "x": 390,
         "y": 140,
         "wires": [
             [
@@ -1769,7 +1675,7 @@
         "payload": "false",
         "payloadType": "bool",
         "x": 170,
-        "y": 460,
+        "y": 420,
         "wires": [
             [
                 "0fc1aea9f3405373"
@@ -1799,7 +1705,7 @@
         "payload": "1",
         "payloadType": "num",
         "x": 170,
-        "y": 340,
+        "y": 300,
         "wires": [
             [
                 "9021d18f82f4ac42"
@@ -1829,7 +1735,7 @@
         "payload": "false",
         "payloadType": "bool",
         "x": 160,
-        "y": 400,
+        "y": 360,
         "wires": [
             [
                 "b8c346de5967093e"
@@ -1845,7 +1751,7 @@
         "name": "read BME",
         "label": "Trigger",
         "order": 9,
-        "width": 3,
+        "width": 6,
         "height": 0,
         "emulateClick": true,
         "tooltip": "",
@@ -1869,7 +1775,7 @@
         "pointerupPayload": "",
         "pointerupPayloadType": "str",
         "x": 120,
-        "y": 820,
+        "y": 780,
         "wires": [
             [
                 "f0ac8ab08c66448a"
@@ -1886,8 +1792,8 @@
         "links": [
             "42457aa4ad095f87"
         ],
-        "x": 215,
-        "y": 820,
+        "x": 235,
+        "y": 740,
         "wires": []
     },
     {
@@ -1899,8 +1805,8 @@
         "links": [
             "f0ac8ab08c66448a"
         ],
-        "x": 245,
-        "y": 600,
+        "x": 285,
+        "y": 620,
         "wires": [
             [
                 "1dcf111b2594c8bd"
@@ -1914,7 +1820,7 @@
         "g": "21a58cbb662a2d77",
         "name": "Gauge SLP",
         "group": "73528bb91092cced",
-        "order": 3,
+        "order": 5,
         "width": 3,
         "height": 3,
         "gtype": "gauge-half",
@@ -1930,11 +1836,11 @@
                 "color": "#534f4b"
             },
             {
-                "from": "1010",
+                "from": "1000",
                 "color": "#08a612"
             },
             {
-                "from": "1025",
+                "from": "1020",
                 "color": "#58e2fe"
             }
         ],
@@ -1946,8 +1852,8 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 970,
-        "y": 920,
+        "x": 950,
+        "y": 880,
         "wires": []
     },
     {
@@ -1957,7 +1863,7 @@
         "g": "21a58cbb662a2d77",
         "name": "Gauge Hum",
         "group": "73528bb91092cced",
-        "order": 4,
+        "order": 6,
         "width": 3,
         "height": 3,
         "gtype": "gauge-half",
@@ -1977,7 +1883,7 @@
                 "color": "#08a612"
             },
             {
-                "from": "70",
+                "from": "65",
                 "color": "#7ae4ff"
             }
         ],
@@ -1989,8 +1895,8 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 990,
-        "y": 1060,
+        "x": 950,
+        "y": 1000,
         "wires": []
     },
     {
@@ -2000,7 +1906,7 @@
         "g": "21a58cbb662a2d77",
         "name": "Gauge Temp",
         "group": "73528bb91092cced",
-        "order": 2,
+        "order": 4,
         "width": 3,
         "height": 3,
         "gtype": "gauge-half",
@@ -2032,8 +1938,8 @@
         "styleRounded": true,
         "styleGlow": false,
         "className": "",
-        "x": 990,
-        "y": 780,
+        "x": 950,
+        "y": 740,
         "wires": []
     },
     {
@@ -2052,123 +1958,8 @@
         "expiry": "",
         "broker": "9f9e276987b2fb1f",
         "x": 790,
-        "y": 220,
+        "y": 180,
         "wires": []
-    },
-    {
-        "id": "268c398ce7d2aedc",
-        "type": "mqtt in",
-        "z": "4626f4eca8ae462b",
-        "d": true,
-        "g": "752e8cf861cf994f",
-        "name": "fb/espIP",
-        "topic": "fb/espIP",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "9f9e276987b2fb1f",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 120,
-        "y": 1480,
-        "wires": [
-            [
-                "e1d37be25fd797d6"
-            ]
-        ]
-    },
-    {
-        "id": "1ce6790e56252c04",
-        "type": "mqtt in",
-        "z": "4626f4eca8ae462b",
-        "d": true,
-        "g": "752e8cf861cf994f",
-        "name": "fb/debug",
-        "topic": "fb/debug",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "9f9e276987b2fb1f",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 120,
-        "y": 1520,
-        "wires": [
-            [
-                "e1d37be25fd797d6"
-            ]
-        ]
-    },
-    {
-        "id": "9b27c9f2292fd667",
-        "type": "mqtt in",
-        "z": "4626f4eca8ae462b",
-        "d": true,
-        "g": "752e8cf861cf994f",
-        "name": "heater",
-        "topic": "heater",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "9f9e276987b2fb1f",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 110,
-        "y": 1600,
-        "wires": [
-            [
-                "e1d37be25fd797d6"
-            ]
-        ]
-    },
-    {
-        "id": "818252558bc7c823",
-        "type": "mqtt in",
-        "z": "4626f4eca8ae462b",
-        "d": true,
-        "g": "752e8cf861cf994f",
-        "name": "boiler",
-        "topic": "boiler",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "9f9e276987b2fb1f",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 110,
-        "y": 1640,
-        "wires": [
-            [
-                "e1d37be25fd797d6"
-            ]
-        ]
-    },
-    {
-        "id": "b6de17e1a7f1e628",
-        "type": "mqtt in",
-        "z": "4626f4eca8ae462b",
-        "d": true,
-        "g": "752e8cf861cf994f",
-        "name": "interval",
-        "topic": "interval",
-        "qos": "2",
-        "datatype": "auto",
-        "broker": "9f9e276987b2fb1f",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 110,
-        "y": 1680,
-        "wires": [
-            [
-                "e1d37be25fd797d6"
-            ]
-        ]
     },
     {
         "id": "44e80559e2fe8234",
@@ -2181,12 +1972,12 @@
         "rules": [
             {
                 "t": "cont",
-                "v": "interval",
+                "v": "wifi",
                 "vt": "str"
             },
             {
                 "t": "cont",
-                "v": "heater",
+                "v": "interval",
                 "vt": "str"
             },
             {
@@ -2196,22 +1987,22 @@
             },
             {
                 "t": "cont",
-                "v": "led",
-                "vt": "str"
-            },
-            {
-                "t": "cont",
                 "v": "debug",
                 "vt": "str"
             },
             {
                 "t": "cont",
-                "v": "espIP",
+                "v": "led",
                 "vt": "str"
             },
             {
                 "t": "cont",
-                "v": "wifi",
+                "v": "heater",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "espIP",
                 "vt": "str"
             },
             {
@@ -2221,30 +2012,29 @@
         "checkall": "true",
         "repair": false,
         "outputs": 8,
-        "x": 390,
+        "x": 410,
         "y": 1400,
         "wires": [
             [
-                "0fab20d54678aa7a",
-                "cc3da2749a513ceb"
+                "5edec3db1778913c"
             ],
             [
-                "35633ed2c71b93f1"
+                "0fab20d54678aa7a"
             ],
             [
                 "10db6128cb5e255a"
             ],
             [
-                "7d9bb908da0322fb"
-            ],
-            [
                 "bf699921c67c5efe"
             ],
             [
-                "d16999edcbece664"
+                "7d9bb908da0322fb"
             ],
             [
-                "5edec3db1778913c"
+                "35633ed2c71b93f1"
+            ],
+            [
+                "d16999edcbece664"
             ],
             [
                 "9d2ce34f03259bbf"
@@ -2265,7 +2055,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 110,
+        "x": 130,
         "y": 1400,
         "wires": [
             [
@@ -2279,7 +2069,7 @@
         "type": "debug",
         "z": "4626f4eca8ae462b",
         "g": "752e8cf861cf994f",
-        "name": "fb",
+        "name": "fb/+",
         "active": false,
         "tosidebar": true,
         "console": false,
@@ -2288,8 +2078,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 230,
-        "y": 1380,
+        "x": 250,
+        "y": 1360,
         "wires": []
     },
     {
@@ -2300,30 +2090,7 @@
         "name": "Description",
         "info": " 1. ### Process feedback from ESP:\n    - GPIO # and state\n    - BME Interval\n    - Debug\n    - ESP IP\n",
         "x": 100,
-        "y": 1280,
-        "wires": []
-    },
-    {
-        "id": "257486427dccd228",
-        "type": "ui-text",
-        "z": "4626f4eca8ae462b",
-        "g": "752e8cf861cf994f",
-        "group": "eea751cd59c30bc9",
-        "order": 2,
-        "width": 3,
-        "height": 0,
-        "name": "Time console",
-        "label": "Last reading:  ",
-        "format": "{{msg.payload}}",
-        "layout": "row-left",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#717171",
-        "wrapText": false,
-        "className": "",
-        "x": 810,
-        "y": 1280,
+        "y": 1260,
         "wires": []
     },
     {
@@ -2332,7 +2099,7 @@
         "z": "4626f4eca8ae462b",
         "g": "21a58cbb662a2d77",
         "group": "73528bb91092cced",
-        "order": 7,
+        "order": 2,
         "width": 3,
         "height": 1,
         "name": "Time BME",
@@ -2345,55 +2112,8 @@
         "color": "#717171",
         "wrapText": false,
         "className": "",
-        "x": 830,
-        "y": 1100,
-        "wires": []
-    },
-    {
-        "id": "2e2bf81fd0f57c1f",
-        "type": "link out",
-        "z": "4626f4eca8ae462b",
-        "g": "21a58cbb662a2d77",
-        "name": "time link out",
-        "mode": "link",
-        "links": [
-            "220c50c70202e2d2"
-        ],
-        "x": 675,
-        "y": 1120,
-        "wires": []
-    },
-    {
-        "id": "220c50c70202e2d2",
-        "type": "link in",
-        "z": "4626f4eca8ae462b",
-        "g": "752e8cf861cf994f",
-        "name": "time link in",
-        "links": [
-            "2e2bf81fd0f57c1f",
-            "d7cafb1ff1371251"
-        ],
-        "x": 675,
-        "y": 1280,
-        "wires": [
-            [
-                "257486427dccd228"
-            ]
-        ]
-    },
-    {
-        "id": "d7cafb1ff1371251",
-        "type": "link out",
-        "z": "4626f4eca8ae462b",
-        "d": true,
-        "g": "21a58cbb662a2d77",
-        "name": "time link out",
-        "mode": "link",
-        "links": [
-            "220c50c70202e2d2"
-        ],
-        "x": 575,
-        "y": 1120,
+        "x": 790,
+        "y": 1040,
         "wires": []
     },
     {
@@ -2410,30 +2130,13 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 170,
-        "y": 980,
+        "x": 110,
+        "y": 920,
         "wires": [
             [
                 "ddd8aacba84f2c47"
             ]
         ]
-    },
-    {
-        "id": "cc3da2749a513ceb",
-        "type": "debug",
-        "z": "4626f4eca8ae462b",
-        "g": "752e8cf861cf994f",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 460,
-        "y": 1280,
-        "wires": []
     },
     {
         "id": "bfbd6f3e61b8b3c4",
@@ -2468,10 +2171,178 @@
         "pointerupPayload": "",
         "pointerupPayloadType": "str",
         "x": 380,
-        "y": 220,
+        "y": 180,
         "wires": [
             [
                 "42e0f40e6b94bfcf"
+            ]
+        ]
+    },
+    {
+        "id": "257486427dccd228",
+        "type": "ui-text",
+        "z": "4626f4eca8ae462b",
+        "g": "21a58cbb662a2d77",
+        "group": "eea751cd59c30bc9",
+        "order": 3,
+        "width": 3,
+        "height": 0,
+        "name": "Time console",
+        "label": "Last reading:  ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "wrapText": false,
+        "className": "",
+        "x": 790,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "0e02d0fa1c8ba111",
+        "type": "ui-led",
+        "z": "4626f4eca8ae462b",
+        "g": "21a58cbb662a2d77",
+        "name": "BME Status",
+        "group": "73528bb91092cced",
+        "order": 1,
+        "width": 3,
+        "height": 0,
+        "label": "BME Status",
+        "labelPlacement": "right",
+        "labelAlignment": "flex-start",
+        "states": [
+            {
+                "value": "1",
+                "valueType": "num",
+                "color": "#0a5a78"
+            },
+            {
+                "value": "0",
+                "valueType": "num",
+                "color": "#575757"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showBorder": false,
+        "showGlow": false,
+        "x": 790,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "b9f2e3d1b77e8dee",
+        "type": "link out",
+        "z": "4626f4eca8ae462b",
+        "g": "21a58cbb662a2d77",
+        "name": "BME OK link out",
+        "mode": "link",
+        "links": [
+            "4e3fedf94445d8f9"
+        ],
+        "x": 625,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "4e3fedf94445d8f9",
+        "type": "link in",
+        "z": "4626f4eca8ae462b",
+        "g": "752e8cf861cf994f",
+        "name": "BME OK link in",
+        "links": [
+            "b9f2e3d1b77e8dee"
+        ],
+        "x": 655,
+        "y": 1260,
+        "wires": [
+            [
+                "5680f40b86eb811e"
+            ]
+        ]
+    },
+    {
+        "id": "5680f40b86eb811e",
+        "type": "ui-led",
+        "z": "4626f4eca8ae462b",
+        "g": "752e8cf861cf994f",
+        "name": "BME Status",
+        "group": "1f360b16b32ec829",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "BME Status",
+        "labelPlacement": "right",
+        "labelAlignment": "flex-start",
+        "states": [
+            {
+                "value": "1",
+                "valueType": "num",
+                "color": "#0a5a78"
+            },
+            {
+                "value": "0",
+                "valueType": "num",
+                "color": "#575757"
+            }
+        ],
+        "allowColorForValueInMessage": false,
+        "shape": "square",
+        "showBorder": false,
+        "showGlow": false,
+        "x": 790,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "d725b8c875d5d731",
+        "type": "debug",
+        "z": "4626f4eca8ae462b",
+        "g": "21a58cbb662a2d77",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "6c880a986fa39ea5",
+        "type": "inject",
+        "z": "4626f4eca8ae462b",
+        "g": "7b0e3269a6233dda",
+        "name": "Init. ESP IP",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 170,
+        "y": 220,
+        "wires": [
+            [
+                "84817230c046ae3e"
             ]
         ]
     },
@@ -2694,8 +2565,8 @@
         ],
         "order": 1,
         "className": "",
-        "visible": "true",
-        "disabled": "false"
+        "visible": true,
+        "disabled": false
     },
     {
         "id": "c72da1dec48c5176",
@@ -2730,8 +2601,8 @@
         ],
         "order": 2,
         "className": "",
-        "visible": "true",
-        "disabled": "false"
+        "visible": true,
+        "disabled": false
     },
     {
         "id": "f633910aef2e9d8b",

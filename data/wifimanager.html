@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESP Wi-Fi Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel='icon' type='image/png' href='wifi.png'>
+  <link rel='stylesheet' type="text/css" href='wifimanager.css'>   
+  <script src='https://kit.fontawesome.com/890c0c4dba.js' crossorigin='anonymous'></script>   <!-- personal Font Awsome link -->
+</head>
+
+<body>
+  <div class="header">
+    <h1><i class="fa-solid fa-wifi"></i> ESP Wi-Fi Manager</h1>
+  </div>
+  <div class="content">   
+    <form action="/" method="POST" class="card">
+      <div class="form-group">
+        <label for="ssid" class="title">WiFi SSID</label>
+        <input type="text" class="wifiInput" id="ssid" name="ssid">
+      </div>
+      <div class="form-group">
+        <label for="pass" class="title">Password</label>
+        <input type="text" class="wifiInput" id="pass" name="pass">
+      </div>
+      <div class="form-group">
+        <label for="router" class="title">Router IP</label>
+        <input type="text" class="wifiInput" id="router" name="router" value="192.168.1.1">
+      </div>
+      <div class="form-group">
+        <label for="ip" class="title">ESP IP</label>
+        <input type="text" class="wifiInput" id="ip" name="ip" value="192.168.1.213">
+      </div>
+      <div class="form-group">
+        <label for="host" class="title">Host IP</label>
+        <input type="text" class="wifiInput" id="host" name="host" value="192.168.1.133">
+      </div>
+      <button type="submit" value="Submit">Submit</button>
+    </form>
+    <div class="card">
+      <p class="card-title">Instructions</p>
+      <ol>
+        <li>Enter the SSID and password of the network you want to connect to.</li>
+        <li>Enter the IP address of the router device in this network.</li>
+        <li>Enter the IP address of the client device (ESP).</li>
+        <li>Enter the IP address of the host device running Node-red.</li>
+        <li>Click "Submit" to save the configuration.</li>
+        <li>The ESP will reboot and connect to the network.</li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>

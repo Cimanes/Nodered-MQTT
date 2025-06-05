@@ -1,0 +1,141 @@
+/* ======================
+Global color variables
+====================== */
+:root {
+  --colorBack: #000 ;   /* Background - body          */
+  --colorNav: #359  ;   /* Background - Navigation    */
+  --colorON: #359   ;   /* Standard button            */
+  --hoverON: #116   ;   /* Standard button hover      */
+  --colorOFF: #666  ;   /* class = 'button-off'       */
+  --hoverOFF: #222  ;   /* hover class = 'button-off' */
+  --colorCard: #ccc ;   /* B.G. class = 'card'        */
+}
+
+/* ======================
+Global design
+====================== */
+html {
+  font-family: Arial, Helvetica, sans-serif; 
+  text-align: center;
+}
+
+body {  
+  background-color: var(--colorBack);
+  background-image: url('background.png');
+  margin: 0;
+}
+
+a { text-decoration: none;  }
+a:hover { background-color: var(--hoverON); }
+
+li { 
+  text-align: left; 
+  margin: 0;
+  padding: 0.5rem 1rem;
+  font-size: small;
+}
+
+/* ======================
+Top area
+====================== */
+.header { 
+  display: flex;
+  overflow:hidden;
+  color: var(--colorON);
+  background-color: var(--colorNav);
+  width: 100%;
+  min-width: 280px;
+  margin: 1rem auto;
+  padding: 2rem 0;
+  border-radius: 1rem;
+  flex-direction: column; /* Arrange items in a column */
+  font-size: 1.8rem; 
+}
+
+/* .icon {float: left;} */
+
+h1 {
+  width: 100%;
+  font-size: 1.8rem; 
+  color: var(--colorON);
+  margin: 0.5rem auto 0 auto;
+  background-color: var(--colorCard);
+}
+
+/* ======================
+Main body
+====================== */
+.content { padding: 30px; }
+
+/* ================================== 
+ Style the cards 
+================================== */
+ .card {
+  margin: 1rem auto;
+  padding: 0.5rem;
+  /* padding-bottom: 1rem; */
+
+  width: 100%;
+  max-width: 500px;
+  background-color: var(--colorCard); 
+  box-shadow: 2px 2px 12px 1px black;
+  border-radius: 1rem;
+}
+
+.card-title { 
+  width: 100%;
+  display: inline-block;
+  color: var(--colorON);
+  margin: 0.5rem 0 0.2rem 0;
+}
+
+.title { 
+  display: inline-block;
+  color: var(--colorON);
+  margin: 0.5rem auto 0.1rem auto;
+  min-width: 90px; /* Optional: set a minimum width for labels */
+  text-align: right; /*Align text to the right*/
+}
+
+/* =====================
+Style the input fields
+===================== */
+.form-group {
+  display: flex;
+  align-items: center; 
+  margin: 1rem 0; /* Add space between form groups */
+}
+
+input {
+  width: 40%;
+  flex: 0.95;
+  background-color: var(--colorOFF);
+  color: #eee;
+  padding: 0.33rem 0;
+  text-align: center;
+  font-size: 1rem;
+  border-radius: .5rem;
+}
+
+/* ================================== 
+ Style the buttons  
+================================== */
+button {
+  border: none;
+  color: var(--colorCard);
+  background-color: var(--colorON);  
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: .5rem;
+  transition-duration: 0.4s;
+  margin: 0.3rem auto;
+  padding: 0.5rem 1rem;
+  width: 40%;
+  min-width: 150px;
+  max-width: 200px;
+}
+
+button:hover { background-color: var(--hoverON); cursor: pointer;}
+.button-off { background-color: var(--colorOFF); }
+.button-off:hover { background-color: var(--hoverOFF); cursor: pointer;}

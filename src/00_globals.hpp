@@ -1,3 +1,12 @@
+// =============================================
+// OPTIONS 
+// =============================================
+#define WIFI_MANAGER    // Use wifi manager with selection of SSID & IP address
+#define USE_OTA         // Use OTA updates
+#define TOLEDO          // Choose Wifi credentials [CIMANES, TOLEDO, TRAVEL]
+#define SSID_TRAVEL "John-Rs-Foodhall_EXT"  //Enter SSID for travel wifi
+#define PASS_TRAVEL "sive2017"              //Enter password for travel wifi
+
 //======================================
 // GLOBAL LIBRARIES
 //======================================
@@ -7,21 +16,22 @@
 //======================================
 // GLOBAL VARIABLES
 //======================================
-SimpleTimer timer;        // SimpleTimer object
 boolean Debug = true;
-
-// struct to assign GPIO pins for each topic
-struct pinMap { const char* topic; const byte gpio; const bool value; }; 
-const pinMap gpioPins[] = {       
-  { "led", LED_BUILTIN, true },
-  { "heater", 13 , false}, 
-  { "boiler", 15, false }
-};
-const byte gpioCount = sizeof(gpioPins) / sizeof(gpioPins[0]);
+SimpleTimer timer;          // SimpleTimer object
 
 // =====================================
 // Setup GPIO's
-// //======================================
+// ======================================
+// struct to assign GPIO pins for each topic
+struct pinMap { const char* topic; const byte gpio; const bool value; }; 
+const pinMap gpioPins[] = {       
+  { "led", LED_BUILTIN, HIGH },
+  { "heater", 13 , LOW }, 
+  { "boiler", 15, LOW }
+};
+const byte gpioCount = sizeof(gpioPins) / sizeof(gpioPins[0]);
+
+
 void initGPIO() {
   for (byte i = 0; i < gpioCount; i++) {
     pinMode(gpioPins[i].gpio, OUTPUT);
