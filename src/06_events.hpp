@@ -43,21 +43,21 @@ void onMqttConnect(bool sessionPresent) {
 void onmqttDisconnect(AsyncMqttClientDisconnectReason reason) {
   if (Debug) { Serial.printf_P(PSTR("MQTT Disconnected: %i \n"), (int)reason); }
   if (WiFi.isConnected()) {
-    if (Debug) Serial.println(F("MQTT re-connecting..."));
     mqttReconnectTimerID = timer.setTimeout(mqttReconnectTimer, []() { mqttClient.connect();});
+    if (Debug) Serial.println(F("MQTT re-connecting..."));
   }
 }
 
 void onmqttSubscribe(uint16_t packetId, uint8_t qos) {
-  if (Debug) Serial.printf_P(PSTR("Sub OK. #%u \n"), packetId);
+  if (Debug) Serial.printf_P(PSTR("Sub. #%u \n"), packetId);
 }
 
 void onmqttUnsubscribe(uint16_t packetId) {
-  if (Debug) Serial.printf_P(PSTR("Unsub OK. #%u \n"), packetId);
+  if (Debug) Serial.printf_P(PSTR("Unsub. #%u \n"), packetId);
 }
 
 void onmqttPublish(uint16_t packetId) {
-  if (Debug) Serial.printf_P(PSTR("Pub OK. #%u \n"), packetId);
+  if (Debug) Serial.printf_P(PSTR("Pub. #%u \n"), packetId);
 }
 
 // Note: expected payload is a C-string. MQTT payload is typically "not pure" --> clean it
