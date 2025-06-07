@@ -1,3 +1,5 @@
+## Introduction
+
 ### Components
 1) Node-red server running in PC / Raspberry pi.
 2) ESP8266 with BME280 and digital outputs available.
@@ -10,14 +12,16 @@ Ensure ports 1883 is open; if required, add a new inbound rule in Windows Defend
 ## ESP8266
 Coded in Arduino enviroment using VS code.
 Following libraries are used: 
-- Simpletimer 
-- ArduinoJson
-- ESP Async Webserver (requires ESPAsyncTCP)
-- Adafruit BME280 Library
-- Adafruit Unified Sensor
-- Marvin Roger AsyncMqttClient
-- AsyncElegantOTA
 
+- [SimpleTimer](https://github.com/jfturcot/SimpleTimer)
+- [ArduinoJson](https://github.com/bblanchon/ArduinoJson)
+- [ESP Async Webserver](https://github.com/ESP32Async/ESPAsyncWebServer) 
+- [Adafruit BME280 Library](https://github.com/adafruit/Adafruit_BME280_Library)
+- [Adafruit Unified Sensor](https://github.com/adafruit/Adafruit_Sensor)
+- [AsyncMqttClient](https://github.com/marvinroger/async-mqtt-client)
+- [AsyncElegantOTA](https://github.com/ayushsharma82/AsyncElegantOTA)
+- [ESPAsyncTCP](https://github.com/ESP32Async/ESPAsyncTCP) --> Used by AsyncMqttClient and ESP Asynch Webserver
+  
 ### Wifi Connection
 - Option 1: Wifi Manager (enable line "#define WIFI_MANAGER")
   Wifi credentials are stored as text files in LittleFS.
